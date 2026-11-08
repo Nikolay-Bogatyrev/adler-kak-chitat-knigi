@@ -1,12 +1,15 @@
 # Книжный клуб: Адлер, «Как читать книги»
 
-- Слайды для показа в Google Meet: https://adler-kak-chitat-knigi.vercel.app/slides.html
-- «Спутник» для участников: https://adler-kak-chitat-knigi.vercel.app/ (тренинг — раздел `#training`)
+- Главная: https://adler-kak-chitat-knigi.vercel.app/
+- Презентация: https://adler-kak-chitat-knigi.vercel.app/slides
+- «Спутник» для участников: https://adler-kak-chitat-knigi.vercel.app/sputnik (тренинг — `#training`)
+- Читалка фрагмента: https://adler-kak-chitat-knigi.vercel.app/reader
 
 ## Что где
 
 - `public/slides.html` — презентация, квизы, тренинг по 15 правилам. Ответы группы вписывает ведущий.
-- `public/index.html` — «Спутник»: метод, практика, тренинг, подбор полки. Участник может пройти тренинг сам.
+- `public/index.html` — главная: ссылки на презентацию, «Спутник» и читалку. Старые ссылки вида `/#training` перенаправляет в «Спутник».
+- `public/sputnik.html` — «Спутник»: метод, практика, тренинг, подбор полки. Участник может пройти тренинг сам.
 
 Сервера нет. Всё, что вписано, хранится в браузере (localStorage) того, кто вписывал, и не синхронизируется.
 В конце занятия на последнем слайде скачайте итоги в `.md`, а участники скачивают свой конспект в «Спутнике».
@@ -25,4 +28,4 @@
 ## Публикация
 
 Репозиторий подключён к Vercel (проект `adler-kak-chitat-knigi`): каждый push в `main` публикует новую версию.
-Папка публикации — `public/` (см. `vercel.json`), сборки нет.
+Папка публикации — `public/` (см. `vercel.json`), сборки нет. Адреса без `.html` (`cleanUrls`).
