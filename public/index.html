@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Спутник к «Как читать книги» Адлера</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,800;1,7..72,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEEE6; --sheet:#F6F7F2; --ink:#1E2740; --graphite:#5E6472; --rule:#C9CDC0;
+  --mark:#F2DC5D; --margin:#9E2B2B; --chip:#E1E4D8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#151A28; --sheet:#1C2233; --ink:#E4E6DE; --graphite:#A3A8B5; --rule:#343C52;
+    --mark:#7A6A12; --margin:#E48A80; --chip:#252C40;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#151A28; --sheet:#1C2233; --ink:#E4E6DE; --graphite:#A3A8B5; --rule:#343C52;
+  --mark:#7A6A12; --margin:#E48A80; --chip:#252C40;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Literata",Georgia,"Times New Roman",serif;font-size:18px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+.hand{font-family:"Caveat","Segoe Print","Comic Sans MS",cursive;color:var(--margin)}
+
+header{padding:72px 0 40px}
+.over{color:var(--graphite);font-size:16px;margin:0 0 18px}
+h1{font-size:clamp(40px,7vw,76px);line-height:1.02;font-weight:800;letter-spacing:-.02em;margin:0;max-width:14ch}
+.lede{max-width:58ch;font-size:20px;margin:28px 0 0}
+.lede .hand{font-size:28px;display:block;margin-top:10px;transform:rotate(-1.5deg);transform-origin:left}
+
+h2{font-size:32px;line-height:1.15;margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+.sub{color:var(--graphite);max-width:60ch;margin:0 0 32px}
+section{padding:56px 0;border-top:1px solid var(--rule)}
+
+/* ladder */
+.ladder{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.ladder li{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.ladder li:last-child{border-bottom:0}
+.ladder .n{font-size:40px;font-weight:800;line-height:1;color:var(--graphite)}
+.ladder h3{margin:0;font-size:21px}
+.ladder p{margin:4px 0 0;max-width:62ch}
+.ladder li:nth-child(1){padding-left:0}
+.ladder li:nth-child(2){padding-left:3%}
+.ladder li:nth-child(3){padding-left:6%}
+.ladder li:nth-child(4){padding-left:9%}
+.qs{margin-top:40px;background:var(--sheet);padding:24px 28px;border-left:4px solid var(--ink)}
+.qs h3{margin:0 0 10px;font-size:19px}
+.qs ol{margin:0;padding-left:22px}
+.qs li{margin:4px 0}
+
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.stages h3{font-size:19px;margin:0 0 6px}
+.stages ul{margin:0;padding-left:18px;font-size:16px}
+.stages li{margin:3px 0}
+@media (max-width:760px){.stages{grid-template-columns:1fr}}
+
+/* picker */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+.chip{font:inherit;font-size:16px;color:var(--ink);background:var(--chip);border:1px solid transparent;
+  padding:8px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--graphite)}
+.chip[aria-pressed="true"]{background:linear-gradient(transparent 18%,var(--mark) 18%,var(--mark) 88%,transparent 88%);border-color:var(--ink)}
+.chip:focus-visible,.btn:focus-visible{outline:3px solid var(--margin);outline-offset:2px}
+.hint{font-size:15px;color:var(--graphite);margin:0 0 36px}
+
+.shelf h3.prof{font-size:26px;margin:48px 0 4px}
+.shelf .question{margin:0 0 20px;max-width:64ch;color:var(--graphite)}
+.shelf .question b{color:var(--ink);font-weight:600}
+.book{display:grid;grid-template-columns:1fr 240px;gap:32px;padding:20px 0;border-top:1px solid var(--rule)}
+.book .t{font-size:21px;font-weight:600;line-height:1.3;margin:0}
+.book .a{color:var(--graphite);font-size:16px;margin:2px 0 8px}
+.book .read{margin:0;font-size:17px}
+.book .read b{font-weight:600}
+.book .note{font-size:24px;line-height:1.15;transform:rotate(-1deg);align-self:center;margin:0}
+.lvl{display:inline-block;font-size:14px;color:var(--graphite);border:1px solid var(--rule);border-radius:3px;padding:0 6px;margin-left:6px;vertical-align:2px}
+.book .also{font-size:14px;color:var(--graphite);margin-top:6px}
+@media (max-width:760px){.book{grid-template-columns:1fr;gap:6px}.book .note{transform:none}}
+
+.cross{background:var(--sheet);padding:20px 24px;margin:8px 0 8px}
+.cross h3{margin:0 0 6px;font-size:19px}
+.cross p{margin:0;font-size:16px}
+.empty{color:var(--graphite);font-style:italic}
+
+/* skill */
+.steps{padding-left:22px;max-width:66ch}
+.steps li{margin:6px 0}
+code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--chip);padding:1px 5px;border-radius:3px}
+.codebox{position:relative;margin-top:24px;background:var(--sheet);border:1px solid var(--rule)}
+.codebar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--rule);font-size:15px;color:var(--graphite)}
+.btn{font:inherit;font-size:15px;background:var(--ink);color:var(--paper);border:0;padding:7px 14px;border-radius:4px;cursor:pointer}
+pre{margin:0;padding:18px;overflow-x:auto;max-height:520px;overflow-y:auto;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;white-space:pre}
+.usage{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 32px;margin-top:28px;max-width:860px}
+.usage div{font-size:16px}
+.usage code{display:inline-block;margin-bottom:4px}
+@media (max-width:760px){.usage{grid-template-columns:1fr}}
+.tags{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 40px;margin:0 0 48px}
+.tags h3{margin:0 0 6px;font-size:20px}
+.tags p{margin:0 0 6px;font-size:16px}
+.tags .lvl{margin-left:0;font-size:15px}
+.lvl{text-decoration:none}
+a.lvl:hover{border-color:var(--ink);color:var(--ink)}
+.lvlrow{padding:28px 0;border-top:1px solid var(--rule)}
+.lvlrow > h3{margin:0;font-size:23px}
+.lvlrow > .bk{margin:2px 0 16px;color:var(--graphite);font-size:16px;max-width:66ch}
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.ways h4{margin:0 0 6px;font-size:17px}
+.ways ol,.ways ul{margin:0;padding-left:20px;font-size:16px}
+.ways li{margin:4px 0}
+.ways .agent{background:var(--sheet);padding:16px 18px;border-left:3px solid var(--ink)}
+.ways .paper{padding:16px 0}
+.ways .agent p{margin:6px 0 0;font-size:16px}
+.found p.intro{max-width:66ch;margin:0 0 16px}
+.pair{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px;margin:24px 0 8px;max-width:900px}
+.pair div{font-size:16px;border-top:2px solid var(--ink);padding-top:8px}
+.pair b{display:block;font-size:17px}
+@media (max-width:760px){.tags,.ways,.pair{grid-template-columns:1fr}}
+/* navigation */
+.toc{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px);margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+.toc-in{max-width:1040px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.toc-in::-webkit-scrollbar{display:none}
+.toc a{flex:none;text-decoration:none;font-size:15px;padding:12px 10px;color:var(--graphite);white-space:nowrap}
+.toc a:hover,.toc a:focus-visible{color:var(--ink)}
+section,header{scroll-margin-top:52px}
+/* accordions */
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+details>summary h3{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+details>summary h3::after{content:"+";font-weight:400;font-size:26px;color:var(--graphite);line-height:1;flex:none}
+details[open]>summary h3::after{content:"\2212"}
+details>summary:focus-visible{outline:3px solid var(--margin);outline-offset:2px}
+details.lvlrow>summary h3{margin:0}
+details.lvlrow[open]>summary{margin-bottom:4px}
+.profdet{border-top:1px solid var(--rule)}
+.profdet>summary h3.prof{margin:0;padding:18px 0}
+.pnote{font-size:16px;border-left:3px solid var(--mark);padding-left:12px}
+.book .read a{color:var(--ink);text-decoration-color:var(--margin)}
+.profdet .cnt{font-size:15px;font-weight:400;color:var(--graphite);margin-left:auto}
+.profdet .book:first-of-type{border-top:0}
+.profdet[open]{padding-bottom:12px}
+.skilldet{margin-top:24px}
+.skilldet>summary{display:inline-block;font-size:16px;padding:10px 16px;border:1px solid var(--ink);border-radius:4px}
+.skilldet[open]>summary{margin-bottom:0}
+code{overflow-wrap:anywhere}
+.ways .agent code,.usage code{display:block;white-space:normal;margin-bottom:6px;padding:6px 8px}
+@media (max-width:760px){
+  body{font-size:17px;line-height:1.55}
+  .wrap,.toc-in{padding-left:16px;padding-right:16px}
+  header{padding:36px 0 28px}
+  .lede{font-size:18px}
+  .lede .hand{font-size:24px}
+  section{padding:36px 0}
+  h2{font-size:26px}
+  .sub{margin-bottom:20px}
+  .ladder li,.ladder li:nth-child(n){padding-left:0;grid-template-columns:36px 1fr;gap:12px}
+  .ladder .n{font-size:28px}
+  .stages{gap:16px;margin-top:24px}
+  .qs{padding:16px 18px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 12px;padding:2px 16px 8px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+  .book{padding:14px 0}
+  .book .t{font-size:18px}
+  .book .note{font-size:20px}
+  .shelf h3.prof{font-size:21px}
+  .lvlrow{padding:16px 0}
+  .lvlrow>summary h3,.lvlrow > h3{font-size:19px}
+  .ways{gap:8px}
+  .ways .paper{padding:8px 0}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:none;font-size:12.5px;padding:14px}
+  .cross{padding:14px 16px}
+}
+footer{padding:40px 0 64px;color:var(--graphite);font-size:15px;border-top:1px solid var(--rule)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== тренинг: 15 правил на минимуме ===== */
+.tr-min{position:sticky;top:46px;z-index:4;display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--paper);padding:10px 0;border-bottom:1px solid var(--rule);margin:0 0 8px}
+.tr-min .lbl{font-family:"Caveat",cursive;font-size:22px;color:var(--margin);margin-right:4px}
+.tr-slot{font-size:14px;border:1px dashed var(--graphite);border-radius:999px;padding:3px 12px;color:var(--graphite);max-width:16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tr-slot.ok{border-style:solid;border-color:var(--ink);color:var(--ink);background:linear-gradient(transparent 18%,var(--mark) 18%,var(--mark) 88%,transparent 88%)}
+.tr-min .prog{margin-left:auto;font-size:14px;color:var(--graphite)}
+.tr-goal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 32px;margin:24px 0 8px;max-width:900px}
+.tr-goal div{font-size:16px;border-top:2px solid var(--ink);padding-top:8px}
+.tr-goal b{display:block;font-family:"Caveat",cursive;font-size:30px;line-height:1;color:var(--margin)}
+.tr-book{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin:24px 0 0;font-size:16px;color:var(--graphite)}
+.tr-book input{flex:1 1 280px;font:inherit;font-family:"Caveat",cursive;font-size:28px;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--rule);outline:0;padding:0 4px}
+.tr-book input:focus{border-color:var(--margin)}
+.tr-stage{font-size:26px;margin:48px 0 4px}
+.tr-stage small{display:block;font-size:16px;font-weight:400;color:var(--graphite);margin-top:4px}
+.tr-rule{display:grid;grid-template-columns:76px 1fr;gap:4px 20px;padding:26px 0;border-top:1px solid var(--rule)}
+.tr-rule>.n{font-family:"Caveat",cursive;font-size:38px;line-height:.9;color:var(--margin)}
+.tr-rule>.n small{display:block;font-family:"Literata",serif;font-size:12px;color:var(--graphite);margin-top:6px}
+.tr-rule h3{margin:0;font-size:20px;line-height:1.3}
+.tr-task{margin:6px 0 14px;font-size:16px;max-width:66ch}
+.tr-task b{font-weight:600}
+.tr-task a{text-decoration-color:var(--margin)}
+.tr-body{min-width:0}
+@media (max-width:760px){.tr-rule{grid-template-columns:1fr}.tr-rule>.n{font-size:30px}.tr-rule>.n small{display:inline;margin-left:8px}.tr-goal{grid-template-columns:1fr}}
+
+.tr-dock{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;background:var(--sheet);border:1px solid var(--rule);padding:8px}
+.tr-dock textarea,.tr-dock input{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:8px 10px;outline:0;min-width:0;flex:1 1 200px}
+.tr-dock textarea{resize:none;min-height:42px;max-height:160px;flex:2 1 260px;line-height:1.4}
+.tr-dock input.short{flex:0 1 80px}
+.tr-dock textarea:focus,.tr-dock input:focus{border-color:var(--ink)}
+.tr-dock .wc{align-self:center;font-size:14px;color:var(--graphite);white-space:nowrap}
+.tr-dock .wc.over{color:var(--margin);font-weight:600}
+.tr-dock.shake{animation:tr-shake .35s}
+@keyframes tr-shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.tr-picks{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tr-pick{font:inherit;font-size:14px;color:var(--ink);background:var(--chip);border:1px solid transparent;padding:6px 12px;border-radius:999px;cursor:pointer}
+.tr-pick:hover{border-color:var(--graphite)}
+.tr-pick[aria-pressed="true"]{background:linear-gradient(transparent 18%,var(--mark) 18%,var(--mark) 88%,transparent 88%);border-color:var(--ink)}
+.tr-add{font:inherit;font-size:15px;background:var(--ink);color:var(--paper);border:0;padding:8px 16px;border-radius:4px;cursor:pointer;white-space:nowrap}
+.tr-add:disabled{opacity:.35;cursor:not-allowed}
+.tr-ghostbtn{font:inherit;font-size:14px;background:transparent;color:var(--ink);border:1px solid var(--ink);padding:6px 12px;border-radius:4px;cursor:pointer}
+.tr-hint{font-size:13px;color:var(--graphite);margin:6px 0 0;min-height:1.2em}
+.tr-hint.warn{color:var(--margin);font-weight:600}
+
+.tr-cards{display:flex;flex-wrap:wrap;gap:18px;padding:22px 2px 6px;align-items:flex-start}
+.tr-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;padding-top:16px}
+.tr-col h4{margin:0 0 4px;font-family:"Caveat",cursive;font-size:26px;line-height:1;color:var(--margin);font-weight:700}
+.tr-col .tr-cards{padding-top:14px}
+.tr-empty{font-family:"Caveat",cursive;font-size:24px;color:var(--graphite);opacity:.55}
+.tr-card{position:relative;width:min(300px,100%);padding:16px 16px 12px;color:#1E2740;border-radius:2px 2px 7px 2px;transform:rotate(var(--rot,0deg));
+  box-shadow:0 1px 1px rgba(0,0,0,.08),0 8px 18px -8px rgba(30,39,64,.45);display:flex;flex-direction:column;gap:6px}
+.tr-cols .tr-card{width:100%}
+.tr-card::before{content:"";position:absolute;top:-9px;left:50%;width:64px;height:18px;transform:translateX(-50%) rotate(-3deg);background:rgba(255,255,255,.5)}
+.tr-card .tx{font-family:"Caveat",cursive;font-size:27px;line-height:1.05;white-space:pre-wrap;overflow-wrap:anywhere}
+.tr-card .tx.l{font-size:22px}
+.tr-card .ex{font-family:"Caveat",cursive;font-size:20px;line-height:1.05;white-space:pre-wrap;overflow-wrap:anywhere}
+.tr-card .ex span{display:block;font-family:"Literata",serif;font-size:10px;letter-spacing:.06em;text-transform:uppercase;opacity:.55}
+.tr-card .x,.tr-card .pin{position:absolute;top:2px;border:0;background:none;font-size:18px;line-height:1;padding:4px 6px;cursor:pointer;color:#1E2740}
+.tr-card .x{right:2px;opacity:.35}.tr-card .pin{left:2px;opacity:.35}
+.tr-card .x:hover,.tr-card .pin:hover{opacity:1}
+.tr-card.pinned{outline:3px solid var(--margin);outline-offset:4px}
+.tr-card.pinned .pin{opacity:1;color:#9E2B2B}
+.tr-ghost{pointer-events:none}
+.tr-ghost .typed{position:absolute;inset:16px 16px 12px;font-family:system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.35;white-space:pre-wrap;overflow:hidden}
+.tr-ink{animation:tr-ink .9s ease-out}
+@keyframes tr-ink{from{clip-path:inset(0 100% 0 0);filter:blur(4px)}to{clip-path:inset(0 0 0 0);filter:blur(0)}}
+
+.tr-topic{font-family:"Caveat",cursive;font-size:36px;line-height:1.1;color:var(--margin);min-height:40px;margin:10px 0}
+.tr-reveal{margin-top:12px}
+.tr-reveal .rb{display:none;margin-top:10px;font-size:16px;border-left:3px solid var(--mark);padding-left:12px;max-width:66ch}
+.tr-reveal.open .rb{display:block}
+.tr-list{display:flex;flex-direction:column;gap:6px;margin:14px 0}
+.tr-row{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;background:var(--sheet);padding:8px 10px}
+.tr-row .rn{font-family:"Caveat",cursive;font-size:28px;line-height:1;color:var(--margin);text-align:center}
+.tr-row .rt{font-family:"Caveat",cursive;font-size:24px;line-height:1.05}
+.tr-row .rt small{font-size:20px;color:var(--graphite)}
+.tr-ctl{display:flex;gap:2px}
+.tr-ctl button{font:inherit;font-size:14px;border:0;background:none;color:var(--graphite);padding:4px 7px;cursor:pointer;border-radius:3px}
+.tr-ctl button:hover{background:var(--chip);color:var(--ink)}
+.tr-srow{display:grid;grid-template-columns:1fr;gap:6px;background:var(--sheet);padding:10px 12px}
+.tr-srow .rt{font-family:"Caveat",cursive;font-size:24px;line-height:1.05}
+
+.tr-chain{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+.tr-link{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:6px 12px 8px;max-width:20em}
+.tr-link.h{border-style:dashed;border-color:var(--graphite);background:transparent}
+.tr-link.c{border-color:var(--margin);border-width:3px;background:linear-gradient(transparent 6%,var(--mark) 6%)}
+.tr-link .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite)}
+.tr-link .t{font-family:"Caveat",cursive;font-size:24px;line-height:1.05;white-space:pre-wrap}
+.tr-link .tr-ctl{position:absolute;top:-14px;right:-6px;background:var(--paper);opacity:0}
+.tr-link:hover .tr-ctl,.tr-link:focus-within .tr-ctl{opacity:1}
+@media (hover:none){.tr-link .tr-ctl{opacity:1}}
+.tr-arrow{font-family:"Caveat",cursive;font-size:30px;line-height:1;color:var(--margin);text-align:center}
+.tr-arrow small{display:block;font-size:16px}
+
+.tr-gate{list-style:none;margin:10px 0;padding:0;max-width:640px}
+.tr-gate li{display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.tr-gate .mk{flex:none;width:22px;height:22px;border-radius:50%;border:1px dashed var(--graphite);display:grid;place-items:center;font-size:13px}
+.tr-gate li.ok .mk{background:var(--ink);color:var(--paper);border:0}
+.tr-gate .gv{margin-left:auto;font-family:"Caveat",cursive;font-size:20px;color:var(--margin);max-width:45%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-manual{display:flex;gap:10px;align-items:flex-start;margin:12px 0;padding:12px 14px;border:2px solid var(--ink);background:var(--sheet);max-width:640px;font-size:16px;cursor:pointer}
+.tr-manual input{width:20px;height:20px;margin-top:3px;accent-color:var(--margin);flex:none}
+.tr-stamp{display:inline-block;font-family:"Caveat",cursive;font-size:58px;line-height:1;color:var(--margin);border:5px solid var(--margin);border-radius:14px;padding:0 18px 6px;transform:rotate(-6deg);margin:10px 0}
+.tr-stamp.hit{animation:tr-stamp .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tr-stamp{from{transform:rotate(-6deg) scale(2.2);opacity:0}to{transform:rotate(-6deg) scale(1);opacity:1}}
+.tr-locked{position:relative}
+.tr-lock{display:none;position:absolute;inset:-6px;z-index:2;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(3px);flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;padding:16px}
+.tr-locked.on .tr-lock{display:flex}
+.tr-lock b{font-family:"Caveat",cursive;font-size:34px;line-height:1;color:var(--margin);font-weight:700}
+
+.tr-quiz .q{font-family:"Caveat",cursive;font-size:30px;line-height:1.1;margin:8px 0 12px;max-width:40ch}
+.tr-quiz .meta{font-size:14px;color:var(--graphite)}
+.tr-quiz .opts{display:flex;flex-wrap:wrap;gap:8px}
+.tr-quiz .opt{font:inherit;font-size:16px;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);padding:8px 14px;border-radius:4px;cursor:pointer}
+.tr-quiz .opt.right{border:2px solid var(--ink);background:linear-gradient(transparent 18%,var(--mark) 18%,var(--mark) 88%,transparent 88%)}
+.tr-quiz .opt.wrong{border:2px solid var(--margin);color:var(--margin)}
+.tr-quiz .why{font-size:16px;margin:10px 0;border-left:3px solid var(--mark);padding-left:12px;max-width:66ch}
+
+.tr-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 28px;margin:18px 0}
+.tr-sum div{border-top:2px solid var(--ink);padding-top:6px;font-size:14px;color:var(--graphite)}
+.tr-sum div.star{border-top-color:var(--margin)}
+.tr-sum .hv{font-family:"Caveat",cursive;font-size:23px;line-height:1.05;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere;margin-top:2px}
+.tr-sum .hv.none{color:var(--graphite);opacity:.6}
+.tr-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px 28px;margin:18px 0;font-size:15px}
+.tr-map h4{margin:10px 0 2px;font-size:15px}
+.tr-map a{display:flex;gap:8px;line-height:1.3;text-decoration:none;color:var(--graphite);padding:2px 0}
+.tr-map a.ok{color:var(--ink)}
+.tr-map a.ok::after{content:"✓";margin-left:auto;color:var(--margin);font-weight:700}
+.tr-map a b{min-width:2.6em;font-weight:600}
+.tr-actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center}
+.tr-room{font-size:15px;color:var(--graphite);margin:10px 0 0}
+
+</style>
+</head>
+<body>
+<nav class="toc" aria-label="Разделы"><div class="toc-in">
+  <a href="#method">Метод</a><a href="#practice">Практика</a><a href="#training">Тренинг</a><a href="#foundation">Логика и грамматика</a><a href="#shelf">Подбор полки</a><a href="#example">Пример</a><a href="#skill">Скилл</a>
+</div></nav>
+<div class="wrap">
+<header>
+  <p class="over">Спутник к книге Мортимера Адлера и Чарльза Ван Дорена «Как читать книги»</p>
+  <h1>Как читать — и что именно</h1>
+  <p class="lede">Адлер учит методу, но оставляет читателя наедине с вопросом, с чего начать. Здесь — фундаментальные книги под вашу профессию или интерес, вопрос для синтопического чтения к каждой полке и скилл, который превращает Claude Code в собеседника по методу Адлера.
+    <span class="hand">карандаш в руку — читаем активно</span></p>
+</header>
+
+<section id="method">
+  <h2>Метод на одной странице</h2>
+  <p class="sub">Четыре уровня накопительные: каждый следующий включает предыдущие.</p>
+  <ol class="ladder">
+    <li><span class="n">1</span><div><h3>Элементарное чтение</h3><p>Что буквально сказано в предложении. Для взрослого читателя — уже пройдено, но всплывает в трудных переводах и терминах.</p></div></li>
+    <li><span class="n">2</span><div><h3>Инспекционное чтение</h3><p>Систематический просмотр за ограниченное время: название, предисловие, оглавление, указатель, ключевые главы, последние страницы. Потом — одно поверхностное прочтение без остановок на непонятном. Ответ: стоит ли книга аналитического чтения?</p></div></li>
+    <li><span class="n">3</span><div><h3>Аналитическое чтение</h3><p>Медленное и полное прочтение одной книги, пока вы не сделаете её своей. Три стадии ниже.</p></div></li>
+    <li><span class="n">4</span><div><h3>Синтопическое чтение</h3><p>Несколько книг вокруг одного вопроса. Вы задаёте общую терминологию, формулируете подвопросы и находите, где авторы расходятся. Для этого у каждой полки ниже есть свой вопрос.</p></div></li>
+  </ol>
+
+  <div class="stages">
+    <div><h3>Структура: о чём книга</h3><ul><li>Определить тип и предмет</li><li>Выразить единство книги в нескольких предложениях</li><li>Составить план частей</li><li>Назвать проблемы автора</li></ul></div>
+    <div><h3>Интерпретация: что сказано</h3><ul><li>Договориться о терминах</li><li>Найти главные суждения</li><li>Восстановить аргументы</li><li>Понять, какие проблемы решены</li></ul></div>
+    <div><h3>Критика: истинно ли это</h3><ul><li>Не судить, пока не можете сказать «понял»</li><li>Спорить доводами, а не вкусом</li><li>Несогласие — это: неосведомлённость, ошибка, нелогичность или неполнота</li></ul></div>
+  </div>
+
+  <div class="qs">
+    <h3>Четыре вопроса, которые задаёт активный читатель</h3>
+    <ol><li>О чём книга в целом?</li><li>Что в ней сказано подробно и как?</li><li>Истинна ли книга — целиком или отчасти?</li><li>И что с того?</li></ol>
+  </div>
+</section>
+
+<section id="practice">
+  <h2>Как это делать: ядро на практике</h2>
+  <p class="sub">У каждой книги в подборе стоит пометка. Она подсказывает, сколько сил стоит вложить, а решать всё равно вам.</p>
+  <div class="tags">
+    <div>
+      <h3><span class="lvl">просмотр</span></h3>
+      <p>Книга важная, но читать её целиком медленно не обязательно. Достаточно осмотреть всю книгу за час-два и внимательно прочитать главы из строки «читать».</p>
+      <p>Пример: «Размышления» Марка Аврелия. Вы осматриваете всю книгу, вдумчиво читаете книги II и IV, а дальше берёте по одной записи в день.</p>
+    </div>
+    <div>
+      <h3><span class="lvl">анализ</span></h3>
+      <p>Книгу стоит сделать своей. Это медленное чтение целиком или целыми частями по трём стадиям: структура, интерпретация, критика. Обычно занимает несколько сессий, и на выходе остаётся конспект.</p>
+      <p>Пример: «Рассуждение о методе» Декарта. Даже такая книга начинается с просмотра: уровни накапливаются.</p>
+    </div>
+  </div>
+
+  <details class="lvlrow">
+    <summary><h3>Элементарное чтение</h3></summary>
+    <p class="bk">На примере «Никомаховой этики»: слова «добродетель» и «счастье» значат здесь не то, что в бытовой речи.</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>На непонятном слове не останавливаться: поставить «?» на полях и читать дальше.</li>
+        <li>В конце главы вернуться к вопросам: часть из них прояснит контекст.</li>
+        <li>Если трудно, сравнить один абзац в двух переводах.</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>Что значит «добродетель» в этом абзаце? Не пересказывай главу</code>
+        <p>Агент работает как словарь, а не замена текста: спрашивайте про слово или фразу и возвращайтесь к книге.</p></div>
+    </div>
+  </details>
+
+  <details class="lvlrow">
+    <summary><h3>Инспекционное чтение (просмотр)</h3></summary>
+    <p class="bk">На примере «Происхождения видов» Дарвина: большую книгу сначала хочется понять целиком.</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ol>
+        <li>Поставить таймер на 30–45 минут.</li>
+        <li>Прочитать введение и оглавление, выписать план на один лист.</li>
+        <li>Прочитать начало и конец глав III–IV и целиком последнюю главу.</li>
+        <li>На форзаце записать два предложения: о чём книга и читать ли дальше.</li>
+      </ol></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>Проведи инспекционное чтение books/origin.pdf</code>
+        <p>Скилл проводит по семи шагам просмотра. В конце он просит ваши два предложения, сравнивает их со своей версией и сохраняет план в <code>reading/</code>.</p></div>
+    </div>
+  </details>
+
+  <details class="lvlrow">
+    <summary><h3>Аналитическое чтение (анализ)</h3></summary>
+    <p class="bk">На примере «Рассуждения о методе» Декарта: около 60 страниц, хороший первый опыт полного разбора.</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>Читать с карандашом: подчёркивать главные суждения, на полях нумеровать шаги аргумента.</li>
+        <li>На форзаце вести словарь терминов (метод, сомнение, ясное и отчётливое) со страницами.</li>
+        <li>После каждой части писать абзац своими словами.</li>
+        <li>Перед критикой пересказать позицию так, чтобы Декарт с ней согласился.</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>Аналитическое чтение, часть II</code>
+        <p>Агент сначала просит вашу формулировку четырёх правил метода, потом сверяет её с текстом и цитатами и вносит термины в таблицу конспекта. Хорошо сочетается с бумагой: читаете с карандашом, а проверяете себя с агентом.</p></div>
+    </div>
+  </details>
+
+  <details class="lvlrow">
+    <summary><h3>Синтопическое чтение</h3></summary>
+    <p class="bk">На примере вопроса ядра «Как прожить хорошую жизнь?»: «Апология Сократа», «Никомахова этика», «Размышления», эпилог «Войны и мира».</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>На большом листе или развороте тетради сделать таблицу: строки — подвопросы, столбцы — авторы.</li>
+        <li>Подвопросы, например: зависит ли счастье от внешних благ? можно ли ему научиться? что делать с тем, что не в нашей власти?</li>
+        <li>В клетках — короткий ответ своими словами и страница. Пустая клетка тоже результат.</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>Синтопика: как прожить хорошую жизнь? Платон, Аристотель, Марк Аврелий, Толстой</code>
+        <p>Агент помогает сформулировать нейтральные подвопросы, находит нужные места и собирает таблицу «подвопрос × автор» в <code>reading/syntopic/</code>. Вывод о том, где авторы расходятся, лучше написать самому.</p></div>
+    </div>
+  </details>
+</section>
+
+<section id="training">
+  <h2>Тренинг: 15 правил на минимуме</h2>
+  <p class="sub">Полный аналитический разбор занимает недели: разбор частей, терминов, утверждений и аргументов нужно повторить для каждой части книги. На встрече у нас около часа, поэтому каждое правило мы пробуем одним коротким упражнением на книге, которая у вас в руках. Основная работа — анализ структуры и интерпретация содержания, а в них три обязательные находки: одно слово, одно предложение и одна цепочка аргументов. Критику книги делаем по возможности, если останется время.</p>
+  <div class="tr-goal">
+    <div><b>одно слово</b>2.1 Найти общий язык с автором, интерпретируя его ключевые слова</div>
+    <div><b>одно предложение</b>2.2 Найти главные утверждения автора, выделив важные предложения</div>
+    <div><b>одна цепочка</b>2.3 Обнаружить аргументы автора или построить их из совокупности утверждений</div>
+  </div>
+  <label class="tr-book"><span>Книга для тренинга:</span><input id="trBook" spellcheck="false"></label>
+  <p class="tr-room">Всё, что вы впишете, хранится только в этом браузере. Ведущий параллельно переносит ответы группы на слайды.</p>
+
+  <div class="tr-min" id="trMin" aria-live="polite"></div>
+
+  <h3 class="tr-stage">1. Анализ структуры книги<small>О чём книга в целом</small></h3>
+
+  <div class="tr-rule" id="r1-1"><div class="n">1.1<small>~3 мин</small></div><div class="tr-body">
+    <h3>Определить тип и тематику книги</h3>
+    <p class="tr-task">Посмотрите на титул, подзаголовок и оглавление. Выберите тип, затем одним-двумя словами запишите предмет книги.</p>
+    <div class="tr-picks" id="trKind"></div>
+    <div class="tr-topic" id="trTopicView"></div>
+    <div class="tr-dock"><input id="trTopic" placeholder="Предмет книги, например: искусство чтения"><button class="tr-add" type="button" id="trTopicBtn">Записать</button></div>
+    <div class="tr-reveal"><button class="tr-ghostbtn" type="button">Ответ Адлера</button><div class="rb">Сам Адлер называет её <b>практической</b>: она учит, как делать, а не только что есть. Трудность практической книги в том, что правила в ней даны, а выполнять их должен сам читатель.</div></div>
+  </div></div>
+
+  <div class="tr-rule" id="r1-2"><div class="n">1.2<small>~5 мин</small></div><div class="tr-body">
+    <h3>Как можно более кратко изложить, о чём повествует книга</h3>
+    <p class="tr-task">Одна фраза, <b>не больше 20 слов</b>: «Эта книга о том, что…». Пишите о сути, не о содержании глав. Лучшую формулировку отметьте ☆.</p>
+    <div data-board="whole" data-maxwords="20" data-pick="phrase" data-ph="Эта книга о том, что…"></div>
+  </div></div>
+
+  <div class="tr-rule" id="r1-3"><div class="n">1.3<small>~4 мин</small></div><div class="tr-body">
+    <h3>Перечислить основные части по порядку и проанализировать каждую тем же способом, что и целое</h3>
+    <p class="tr-task">По оглавлению назовите крупные части и для каждой напишите одну фразу, как для книги целиком. Сегодня хватит одного уровня, а дома можно спуститься до глав.</p>
+    <div class="tr-list" id="trOutline"></div>
+    <div class="tr-dock" id="trOutlineDock"><textarea rows="1" placeholder="Часть: как называется"></textarea><input placeholder="О чём она, одной фразой"><button class="tr-add" type="button">Добавить</button></div>
+    <div class="tr-reveal"><button class="tr-ghostbtn" type="button">Как в оригинале</button><div class="rb">I. Измерения чтения · II. Третий уровень чтения: аналитическое чтение · III. Подходы к разным видам литературы · IV. Конечные цели чтения.<br><span style="color:var(--graphite);font-size:14px">Это перевод названий из английского издания 1972 года. В русском издании формулировки могут отличаться, сверьтесь с оглавлением.</span></div></div>
+  </div></div>
+
+  <div class="tr-rule" id="r1-4"><div class="n">1.4<small>~3 мин</small></div><div class="tr-body">
+    <h3>Определить, какие проблемы стремится решить автор</h3>
+    <p class="tr-task">Только в форме вопроса со знаком «?». Например: «Как научиться у книги, если учителя рядом нет?» Эти вопросы вернутся ниже, в упражнении «решено или нет».</p>
+    <div data-board="problems" data-require="?" data-ph="Как…? Почему…? Что…?"></div>
+  </div></div>
+
+  <h3 class="tr-stage">2. Интерпретация содержания книги<small>Что именно сказано и как: здесь собирается минимум</small></h3>
+
+  <div class="tr-rule" id="r2-1"><div class="n">2.1<small>~6 мин</small></div><div class="tr-body">
+    <h3>Найти общий язык с автором, интерпретируя его ключевые слова</h3>
+    <p class="tr-task">Находка №1. Найдите слово, которое Адлер использует в особом смысле: <i>активный</i>, <i>понимание</i>, <i>анализ</i>, <i>великая книга</i>… Чем значение у автора отличается от обычного? См. <a href="#foundation">«Слово и термин»</a>. Главное слово отметьте ☆.</p>
+    <div data-board="terms" data-fields="Слово*|Стр.|В обычной речи|Как понимает автор*" data-pick="word"></div>
+  </div></div>
+
+  <div class="tr-rule" id="r2-2"><div class="n">2.2<small>~6 мин</small></div><div class="tr-body">
+    <h3>Найти главные утверждения автора, выделив важные предложения</h3>
+    <p class="tr-task">Находка №2. Найдите предложение, которое вы подчеркнули бы двумя линиями. Перепишите его со страницей и <b>перескажите своими словами</b>: если пересказать не получается, вы его ещё не поняли. Помните, что одно предложение может нести несколько суждений.</p>
+    <div data-board="sentences" data-fields="Предложение из книги*|Стр.|Своими словами*" data-pick="sentence"></div>
+  </div></div>
+
+  <div class="tr-rule" id="r2-3"><div class="n">2.3<small>~8 мин</small></div><div class="tr-body">
+    <h3>Обнаружить аргументы автора или построить их из совокупности утверждений</h3>
+    <p class="tr-task">Находка №3. Возьмите главное предложение, выбранное выше, как <b>вывод</b>. Чем автор его обосновывает? Найдите посылки в тексте, а недостающее звено достройте как <b>скрытую посылку</b>. Подробнее в упражнении <a href="#foundation">«Разбор аргумента»</a>.</p>
+    <div class="tr-chain" id="trChain"></div>
+    <div class="tr-dock" id="trChainDock"><textarea rows="1" placeholder="Звено аргумента: цитатой или своими словами"></textarea><input class="short" placeholder="Стр."><span class="tr-picks"><button type="button" class="tr-pick" aria-pressed="true" data-k="p">посылка</button><button type="button" class="tr-pick" aria-pressed="false" data-k="h">скрытая посылка</button><button type="button" class="tr-pick" aria-pressed="false" data-k="c">вывод</button></span><button class="tr-add" type="button">Добавить</button></div>
+    <div class="tr-reveal"><button class="tr-ghostbtn" type="button">Пример цепочки</button><div class="rb">Посылка: понимание растёт, только когда читатель сам делает работу. Посылка: работа — это вопросы к книге и ответы на них. Скрытая посылка: книга сама не ответит на незаданный вопрос. <b>Вывод: чем активнее чтение, тем оно лучше.</b></div></div>
+  </div></div>
+
+  <div class="tr-rule" id="r2-4"><div class="n">2.4<small>~3 мин</small></div><div class="tr-body">
+    <h3>Определить, какие проблемы автор решил, а какие нет; во втором случае выяснить, знает ли автор о нерешённой проблеме</h3>
+    <p class="tr-task">Вопросы автора, записанные выше, вернулись. Отметьте для каждого, что с ним сделал автор.</p>
+    <div class="tr-list" id="trSolved"></div>
+  </div></div>
+
+  <h3 class="tr-stage">3а. Критика книги как средства передачи знаний<small>Ворота «я понимаю» завершают интерпретацию. Дальше — по возможности, если останется время</small></h3>
+
+  <div class="tr-rule" id="r3a-1"><div class="n">3а.1<small>~2 мин</small></div><div class="tr-body">
+    <h3>Не критиковать, пока не завершены анализ и интерпретация</h3>
+    <p class="tr-task">Не говорить «согласен», «возражаю» или «решу позже», пока не можете сказать <b>«я понимаю»</b>. Проверьте, что собрано, и пройдите ворота. До этого упражнения на критику ниже закрыты.</p>
+    <ul class="tr-gate" id="trGate"></ul>
+    <label class="tr-manual"><input type="checkbox" id="trGateManual"><span>Я могу пересказать главную мысль автора так, что <b>он подписался бы под пересказом</b>.</span></label>
+    <div id="trStamp"></div>
+    <button class="tr-add" type="button" id="trGateBtn" disabled>Я понимаю</button>
+    <button class="tr-ghostbtn" type="button" id="trGateReset" hidden>Закрыть ворота снова</button>
+  </div></div>
+
+  <div class="tr-rule" id="r3a-2"><div class="n">3а.2<small>~3 мин</small></div><div class="tr-body">
+    <h3>Не возражать из любви к спорам</h3>
+    <p class="tr-task">Шесть реплик о книге Адлера. Какая из них спор ради спора, а какая обоснованное возражение?</p>
+    <div class="tr-quiz" id="trQuiz"></div>
+  </div></div>
+
+  <div class="tr-rule" id="r3a-3"><div class="n">3а.3<small>~6 мин</small></div><div class="tr-body tr-locked" data-gated>
+    <div class="tr-lock"><b>Сначала «я понимаю»</b><span><b>3а.1</b> Не критиковать, пока не завершены анализ и интерпретация: не говорить «согласен», «возражаю» или «решу позже», пока не можете сказать «я понимаю».</span><span><a href="#r3a-1" class="tr-ghostbtn" style="text-decoration:none">← к воротам «я понимаю»</a> <button class="tr-ghostbtn" type="button" data-unlock>открыть всё равно</button></span></div>
+    <h3>Учитывать разницу между знанием и мнением, обосновывая все критические суждения</h3>
+    <p class="tr-task">Возьмите главное предложение или вывод цепочки аргументов и выберите позицию. Поле «потому что» обязательно: без него это мнение, а не суждение.</p>
+    <div data-board="critique" data-fields="Утверждение автора своими словами*|Потому что…*" data-columns="Согласен|Возражаю|Решу позже"></div>
+  </div></div>
+
+  <h3 class="tr-stage">3б. Специфические параметры критики<small>Четыре линзы для возражения · по возможности</small></h3>
+
+  <div class="tr-rule" id="r3b"><div class="n">3б<small>~5 мин</small></div><div class="tr-body tr-locked" data-gated>
+    <div class="tr-lock"><b>Сначала «я понимаю»</b><span><b>3а.1</b> Не критиковать, пока не завершены анализ и интерпретация: не говорить «согласен», «возражаю» или «решу позже», пока не можете сказать «я понимаю».</span><span><a href="#r3a-1" class="tr-ghostbtn" style="text-decoration:none">← к воротам «я понимаю»</a> <button class="tr-ghostbtn" type="button" data-unlock>открыть всё равно</button></span></div>
+    <h3>Показать, где автору не хватает информации, где он владеет неверной информацией, где он нелогичен, где его анализ или изложение не завершены</h3>
+    <p class="tr-task">Если вы возражаете, по какой линзе? Важное следствие у Адлера: если вы не можете показать ни одного из первых трёх пунктов, <b>вы обязаны согласиться</b>, хотя бы отчасти. Четвёртый пункт ограничивает согласие, но не отменяет его.</p>
+    <div data-board="lenses" data-fields="Где именно: стр., мысль*|Почему вы так считаете*" data-columns="Не хватает информации|Неверная информация|Нелогичен|Не завершён"></div>
+  </div></div>
+
+  <h3 class="tr-stage">И что с того?<small>Четвёртый вопрос активного читателя</small></h3>
+
+  <div class="tr-rule" id="r4"><div class="n">?<small>~4 мин</small></div><div class="tr-body">
+    <h3>Что вы с завтрашнего дня сделаете в чтении по-другому?</h3>
+    <p class="tr-task">Конкретно: какая книга и какой приём.</p>
+    <div data-board="sowhat" data-ph="Завтра я…"></div>
+  </div></div>
+
+  <h3 class="tr-stage" id="trResult">Что собрано<small>Итог тренинга и домашнее задание</small></h3>
+  <div class="tr-sum" id="trSum"></div>
+  <div class="tr-map" id="trMap"></div>
+  <p class="pnote" style="max-width:66ch">Ядро — анализ структуры и интерпретация, критика — по возможности. Правила без галочки остаются на дом. Полный анализ означает повторить разбор частей, терминов, утверждений и аргументов для каждой части книги. Конспект ниже скачивается в формате <a href="#skill">скилла</a>: положите его в <code>reading/</code> и продолжите с агентом, например <code>Аналитическое чтение, продолжи с моего конспекта</code>.</p>
+  <div class="tr-actions">
+    <button class="tr-add" type="button" id="trExport">Скачать конспект (.md)</button>
+    <button class="tr-ghostbtn" type="button" id="trCopy">Скопировать конспект</button>
+    <button class="tr-ghostbtn" type="button" id="trReset">Начать заново</button>
+  </div>
+</section>
+
+<section id="foundation" class="found">
+  <h2>Фундамент: логика и грамматика</h2>
+  <p class="intro">Метод Адлера опирается на два навыка, которые раньше давала школа: грамматику и логику. Вместе с риторикой они составляли средневековый тривиум. Когда Адлер просит «договориться о терминах» и «найти суждения», он разводит слово и термин, предложение и суждение.</p>
+  <div class="pair">
+    <div><b>Слово и термин</b>Одно слово может нести несколько терминов: «природа» у Аристотеля значит то сущность вещи, то мир вокруг. Термин — это слово в одном определённом значении.</div>
+    <div><b>Предложение и суждение</b>Одно суждение можно выразить разными предложениями, а одно длинное предложение может содержать три-четыре суждения. Грамматика помогает их разделить.</div>
+  </div>
+  <p class="intro">Логику в советской школе преподавали отдельным предметом лишь в конце 1940-х и 1950-е, а грамматика обычно заканчивается к седьмому классу. Поэтому в подбор добавлена полка «Логика и грамматика», а ниже — упражнения, чтобы вспомнить эти навыки или выстроить их заново. Хватит 10–15 минут два-три раза в неделю.</p>
+
+  <details class="lvlrow">
+    <summary><h3>Разбор аргумента</h3></summary>
+    <p class="bk">На примере конца «Апологии Сократа», где Сократ объясняет, почему не боится смерти.</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>Выписать тезис одной фразой.</li>
+        <li>Пронумеровать посылки и дописать скрытые: то, что автор считает очевидным.</li>
+        <li>Отметить, следует ли вывод, или в цепочке есть разрыв.</li>
+        <li>Для практических споров удобна схема Тулмина: утверждение, данные, основание, оговорка, возражение.</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>drill: разбери аргумент в этом абзаце, сначала спроси мою версию</code>
+        <p>Агент сверяет ваш разбор с текстом. Можно попросить записать карту аргумента в Argdown — это текстовый формат, который удобно хранить рядом с конспектом.</p></div>
+    </div>
+  </details>
+
+  <details class="lvlrow">
+    <summary><h3>Полнота и структура тезисов</h3></summary>
+    <p class="bk">На примере вашего рабочего документа: продуктового решения, плана или письма.</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>Построить пирамиду: главный тезис сверху, три-пять доводов под ним.</li>
+        <li>Проверить, что доводы не пересекаются и вместе покрывают тезис.</li>
+        <li>Спросить себя: какого довода не хватает, чтобы скептик согласился?</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>drill: проверь мою структуру на пропуски и пересечения</code>
+        <p>Агент называет пробелы вопросами, а не готовыми ответами, чтобы достраивали вы.</p></div>
+    </div>
+  </details>
+
+  <details class="lvlrow">
+    <summary><h3>Синтаксис трудного предложения</h3></summary>
+    <p class="bk">На примере самого длинного предложения из «Рассуждения о методе».</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>Подчеркнуть подлежащее и сказуемое, взять в скобки придаточные.</li>
+        <li>Переписать предложение тремя короткими, не потеряв смысла.</li>
+        <li>Посчитать, сколько в нём суждений.</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>drill: разбери синтаксис этого предложения деревом</code>
+        <p>Сначала ваш разбор, потом дерево агента и сравнение.</p></div>
+    </div>
+  </details>
+
+  <details class="lvlrow">
+    <summary><h3>Слово и термин</h3></summary>
+    <p class="bk">На примере слова «разум» у Декарта или «природа» у Аристотеля.</p>
+    <div class="ways">
+      <div class="paper"><h4>На бумаге</h4><ul>
+        <li>Выписать пять-шесть мест, где встречается слово, со страницами.</li>
+        <li>Разложить их по значениям и дать каждому значению своё название.</li>
+      </ul></div>
+      <div class="agent"><h4>С агентом</h4>
+        <code>drill: найди все употребления слова «разум» и сгруппируй по значениям</code>
+        <p>Здесь агент особенно полезен: он быстро найдёт все места в файле книги, а решать, какое значение главное, будете вы.</p></div>
+    </div>
+  </details>
+</section>
+
+<section id="shelf">
+  <h2>Подбор полки</h2>
+  <p class="sub">Выберите одну или несколько областей. Если выбрать несколько, сверху появятся книги на пересечении — с них удобнее всего начинать синтопическое чтение.</p>
+  <div class="chips" id="chips" role="group" aria-label="Профессии и интересы"></div>
+  <p class="hint">«Просмотр» означает, что достаточно осмотреть книгу и вдумчиво прочитать нужные главы. «Анализ» означает, что книга заслуживает медленного разбора. Нажмите на пометку, чтобы увидеть, как читать на бумаге или с агентом.</p>
+  <div class="shelf" id="out" aria-live="polite"></div>
+</section>
+
+<section id="example" class="example">
+  <h2>Пример: полка для продуктового дизайнера</h2>
+  <p class="sub">Это один из возможных вариантов того, как может выглядеть подборка, разложенная по стадиям Адлера. Книги можно заменить на свои, а стадии пройти в любом порядке. Эта же полка есть в подборе выше.</p>
+
+  <h3 class="prof">Структура: из чего состоит система</h3>
+  <p class="question">На первой стадии аналитического чтения Адлер предлагает определить тип книги, сформулировать её главную мысль и набросать план частей. Дизайнеру такой взгляд может помочь увидеть архитектуру продукта и ментальные модели пользователей.</p>
+  <div class="book"><div><p class="t">Дизайн привычных вещей</p><p class="a">Дональд Норман</p><p class="read">Можно попробовать выделить его базовые понятия — аффордансы, означающие, ограничения, обратную связь — и нарисовать для себя карту того, как возникает ошибка пользователя.</p></div><p class="note hand">когда виновата дверь, а не человек</p></div>
+  <div class="book"><div><p class="t">Интерфейс: новые направления в проектировании компьютерных систем</p><p class="a">Джеф Раскин</p><p class="read">Раскин подходит к интерфейсу почти инженерно: режимы, монотонность, количественные оценки. Если разложить книгу на его тезисы, может получиться взгляд на человеко-ориентированные системы, который не зависит от трендов.</p></div><p class="note hand">интерфейс, измеренный почти инженерно</p></div>
+
+  <h3 class="prof">Интерпретация: термины, суждения, аргументы</h3>
+  <p class="question">Вторая стадия того же аналитического чтения — «договориться с автором» о словах и восстановить его аргументы. Для дизайнера это близко к работе со сценариями и исследованиями.</p>
+  <div class="book"><div><p class="t">100 главных принципов дизайна</p><p class="a">Сьюзан Вайншенк</p><p class="read">Можно выписывать термины — восприятие, внимание, память, мотивация — и смотреть, на какие исследования опирается автор. Это может пригодиться, когда хочется объяснить решение бизнесу через данные, а не через вкус.</p></div><p class="note hand">язык данных для разговора с бизнесом</p></div>
+  <div class="book"><div><p class="t">Дизайн — это работа</p><p class="a">Майк Монтейро</p><p class="read">Интересно проследить его аргументы о профессиональной и этической ответственности дизайнера и посмотреть, что из этого откликается в вашей практике.</p></div><p class="note hand">дизайнер отвечает за то, что выпустил</p></div>
+
+  <h3 class="prof">Синтопическое чтение: несколько книг вокруг одного вопроса</h3>
+  <p class="question">Например, можно взять вместе «Дизайн-мышление в бизнесе» Тима Брауна, «Бизнес с нуля» Эрика Риса и «Думай медленно… решай быстро» Даниэля Канемана. Один из возможных вопросов: <b>как совместить то, как люди на самом деле принимают решения, с творческим поиском и ограничениями бизнеса?</b> Можно перевести термины трёх авторов на общий язык и посмотреть, где дизайн-мышление помогает быстрой проверке гипотез, а где Канеман объясняет, почему MVP иногда показывает не то, чего мы ждём.</p>
+</section>
+
+<section id="skill">
+  <h2>Скилл для Claude Code</h2>
+  <p class="sub">Скилл не пересказывает книгу за вас. Он ведёт сессии по методу Адлера: сначала спрашивает вашу формулировку, затем сверяет её с текстом и записывает конспект в файл проекта.</p>
+  <ol class="steps">
+    <li>Создайте папку <code>~/.claude/skills/adler-reading/</code> (для всех проектов) или <code>.claude/skills/adler-reading/</code> внутри конкретного проекта.</li>
+    <li>Сохраните туда текст ниже как <code>SKILL.md</code>.</li>
+    <li>Положите книгу в проект (pdf, epub, md или txt) — так Claude сможет цитировать точно и со страницами.</li>
+    <li>Запустите Claude Code в этой папке и попросите начать сессию. Для тренировки логики и грамматики начните запрос со слова <code>drill</code>.</li>
+  </ol>
+  <div class="usage">
+    <div><code>Проведи инспекционное чтение books/leviathan.pdf</code><br>Быстрый осмотр и решение, читать ли глубже.</div>
+    <div><code>Аналитическое чтение, глава 3</code><br>Одна глава за сессию, вопросы по одному, конспект в reading/.</div>
+    <div><code>Синтопика: что оправдывает власть? Гоббс, Локк, Милль</code><br>Таблица «подвопрос × автор» и спорные точки.</div>
+    <div><code>Повтори мои заметки по Канеману</code><br>Вопросы на воспроизведение перед следующей сессией.</div>
+  </div>
+  <details class="skilldet"><summary>Показать текст SKILL.md</summary>
+  <div class="codebox">
+    <div class="codebar"><span>SKILL.md</span><button class="btn" id="copy" type="button">Скопировать</button></div>
+    <pre id="skilltext">---
+name: adler-reading
+description: Вдумчивое чтение книги, главы, статьи или документа по методу Мортимера Адлера («Как читать книги»). Используй, когда пользователь просит разобрать книгу, прочитать главу вместе, сделать конспект, подготовиться к чтению, сравнить несколько книг по одному вопросу, или упоминает Адлера, аналитическое/синтопическое чтение, inspectional/analytical/syntopical reading, close reading, reading notes.
+---
+
+# Чтение по Адлеру
+
+Цель — помочь пользователю ПОНЯТЬ книгу самому, а не прочитать её за него.
+Ты — собеседник в духе Сократа: сначала спрашиваешь мнение пользователя, потом
+сверяешь его с текстом и даёшь свою версию. Пересказ без участия читателя — провал.
+
+## Четыре вопроса активного читателя
+Возвращайся к ним на каждом уровне:
+1. О чём книга в целом?
+2. Что именно в ней сказано и как?
+3. Истинна ли книга — целиком или отчасти?
+4. И что с того? Что из этого следует для меня?
+
+## Выбор режима
+Спроси (или определи из запроса), какой режим нужен. Если книга новая — начни с просмотра.
+
+- `inspect` — инспекционное чтение (быстрый осмотр, 15–60 минут)
+- `analyze` — аналитическое чтение (медленное, по главам, несколько сессий)
+- `syntopic` — синтопическое чтение (несколько книг вокруг одного вопроса)
+- `review` — повторение заметок перед следующей сессией
+- `drill` — короткая тренировка базовых навыков: логики и грамматики
+
+## Где хранить заметки
+Все заметки — в `reading/&lt;slug-книги&gt;.md` в текущем проекте (создай папку, если нет).
+Синтопические проекты — в `reading/syntopic/&lt;slug-вопроса&gt;.md`.
+Перед началом сессии ВСЕГДА прочитай существующий файл заметок и продолжи с места остановки.
+Если текст книги есть локально (pdf, epub, md, txt) — читай его инструментами, цитируй точно,
+указывай страницу/главу. Если текста нет — работай с тем, что пользователь вставляет,
+и честно отмечай, где ты опираешься на общее знание о книге, а не на текст.
+
+## Режим inspect — систематический просмотр
+Пройди по шагам и после каждого шага коротко фиксируй вывод:
+1. Название, подзаголовок, предисловие — что автор обещает?
+2. Оглавление — какова структура? Набросай её.
+3. Указатель — какие термины повторяются чаще всего?
+4. Аннотация / вступление издателя.
+5. Две-три ключевые главы: начало и конец каждой.
+6. Пролистать, читая абзац-другой; обязательно последние страницы.
+7. Поверхностное прочтение: не останавливаться на непонятном.
+
+Итог: попроси пользователя ответить своими словами: к какому типу относится книга
+(практическая / теоретическая; наука, история, философия, художественная), о чём она
+в 1–2 предложениях, стоит ли читать её аналитически. Затем дай свою версию и сравни.
+
+## Режим analyze — аналитическое чтение (три стадии)
+
+### Стадия 1. Структура: о чём книга
+- Классифицировать книгу по типу и предмету.
+- Сформулировать единство всей книги в 1–3 предложениях.
+- Выделить главные части и показать, как они связаны (план).
+- Определить, какие проблемы автор пытается решить.
+
+### Стадия 2. Интерпретация: что сказано
+- Термины: найти ключевые слова и договориться с автором о их значении.
+  Записывай в таблицу «слово → значение у автора».
+- Суждения: найти главные предложения и пересказать их своими словами.
+- Аргументы: восстановить цепочки рассуждений (посылки → вывод).
+- Решения: какие проблемы автор решил, а какие нет — и знает ли он об этом.
+
+### Стадия 3. Критика: истинно ли это
+- Не соглашаться и не спорить, пока пользователь не может сказать «я понял».
+  Проверка: попроси пересказать позицию автора так, чтобы автор с ней согласился.
+- Различать знание и мнение — требовать доводов, а не вкусов.
+- Несогласие формулировать одним из четырёх способов: автор
+  (а) неосведомлён, (б) ошибается в фактах, (в) нелогичен, (г) его анализ неполон.
+
+### Как вести сессию
+- Одна глава или часть за сессию.
+- Сначала вопрос пользователю → его ответ → сверка с текстом → твоя версия.
+- Не больше 3 вопросов за раз. Не читай лекцию.
+- В конце сессии допиши в файл заметок: краткий итог главы, новые термины,
+  ключевые суждения с цитатами, открытые вопросы, «что с того» для пользователя.
+
+## Режим syntopic — синтопическое чтение
+1. Сформулировать вопрос, а не тему («Что оправдывает власть?», а не «политика»).
+2. Найти в каждой книге релевантные места (инспекционно).
+3. Привести авторов к общей терминологии — твоей, не их.
+4. Сформулировать нейтральные подвопросы, на которые каждый автор отвечает.
+5. Определить спорные точки: где авторы расходятся и почему.
+6. Проанализировать дискуссию, не выбирая победителя раньше времени.
+Итог — таблица «подвопрос × автор» и абзац о том, что осталось нерешённым.
+
+## Режим review
+Прочитай файл заметок, задай 3–5 вопросов на воспроизведение (термины, главные
+суждения, аргументы) и предложи, с чего начать следующую сессию.
+
+## Режим drill — логика и грамматика
+Короткие упражнения на 10–15 минут на материале книги, которую пользователь читает,
+или на его собственном рабочем тексте. Сначала ответ пользователя, потом твоя проверка.
+
+1. Разбор аргумента. Дай абзац. Попроси назвать тезис, пронумеровать посылки,
+   восстановить скрытые посылки и сказать, следует ли вывод. Если просят карту —
+   запиши её в формате Argdown или по схеме Тулмина: утверждение, данные, основание,
+   оговорка, возможное возражение.
+2. Полнота. Возьми структуру пользователя (план, документ, решение) и проверь:
+   один главный тезис, доводы не пересекаются, ничего существенного не пропущено.
+   Назови пробелы вопросами, а не готовыми ответами.
+3. Синтаксис. Возьми длинное предложение. Попроси найти подлежащее, сказуемое и
+   придаточные, затем переписать его несколькими короткими без потери смысла.
+   Покажи разбор деревом и скажи, сколько в предложении суждений.
+4. Слово и термин. Найди в тексте все употребления ключевого слова (grep по файлу)
+   и сгруппируй их по значениям. Спроси, в каком значении автор использует его
+   в главном аргументе.
+
+Итог упражнения коротко допиши в раздел «Тренировка» файла заметок.
+
+## Шаблон файла заметок
+
+```markdown
+# &lt;Название&gt; — &lt;Автор&gt;, &lt;год&gt;
+Тип: &lt;практическая/теоретическая; предмет&gt;
+Режим: &lt;inspect | analyze | syntopic&gt;
+Статус: &lt;глава/часть, на которой остановились&gt;
+
+## Единство книги
+&lt;1–3 предложения&gt;
+
+## План
+- Часть I: ...
+
+## Проблемы автора
+- ...
+
+## Термины
+| Слово | Значение у автора | Где |
+|---|---|---|
+
+## Ключевые суждения
+- «цитата» (стр.) — своими словами: ...
+
+## Аргументы
+- Посылки → вывод
+
+## Критика
+- Понял ли я? ...
+- Согласен / не согласен, потому что ...
+
+## Что с того
+- ...
+
+## Открытые вопросы
+- ...
+
+## Тренировка
+- &lt;дата&gt;: &lt;упражнение&gt; — что получилось, что было трудно
+```
+</pre>
+  </div>
+  </details>
+</section>
+
+<footer>Подборка — отправная точка, а не канон. Адлер сам считал список великих книг открытым: добавляйте то, что выдерживает перечитывание.</footer>
+</div>
+
+<script>
+const B = {
+  plato:{t:"Государство",a:"Платон, ок. 375 до н. э.",lvl:"анализ",read:"<b>Читать:</b> книги I–II (что такое справедливость) и VII (миф о пещере). Остальное — просмотр.",note:"первый спор о том, как устроено общее благо"},
+  ethics:{t:"Никомахова этика",a:"Аристотель",lvl:"анализ",read:"<b>Читать:</b> книги I–II (счастье и добродетель как привычка), VIII–IX (дружба).",note:"привычка как основа характера"},
+  aurelius:{t:"Размышления",a:"Марк Аврелий",lvl:"просмотр",read:"<b>Читать:</b> книги II и IV, затем по записи в день.",note:"дневник человека с огромной властью"},
+  darwin:{t:"Происхождение видов",a:"Чарльз Дарвин, 1859",lvl:"анализ",read:"<b>Читать:</b> введение, главы III–IV (борьба за существование, отбор) и XV (заключение).",note:"образец длинного аргумента"},
+  descartes:{t:"Рассуждение о методе",a:"Рене Декарт, 1637",lvl:"анализ",read:"<b>Читать:</b> целиком, особенно часть II — четыре правила метода. Около 60 страниц.",note:"как разбить задачу на части"},
+  tolstoy:{t:"Война и мир",a:"Лев Толстой, 1869",lvl:"анализ",read:"<b>Читать:</b> роман целиком; эпилог, часть II — отдельно, как трактат о философии истории.",note:"кто на самом деле управляет событиями?"},
+
+  rhetoric:{t:"Риторика",a:"Аристотель",lvl:"анализ",read:"<b>Читать:</b> книга I, гл. 1–3 (этос, пафос, логос) и книга II о характерах слушателей.",note:"любая презентация — это риторика"},
+  smith:{t:"Исследование о природе и причинах богатства народов",a:"Адам Смит, 1776",lvl:"просмотр",read:"<b>Читать:</b> книга I, гл. 1–3 (разделение труда и размер рынка), гл. 7 (цена).",note:"почему булавочная фабрика — про масштаб"},
+  simon:{t:"Науки об искусственном",a:"Герберт Саймон, 1969",lvl:"анализ",read:"<b>Читать:</b> главы 1 и 5 («Наука проектирования»).",note:"проектирование как дисциплина"},
+  alexanderNotes:{t:"Заметки о синтезе формы",a:"Кристофер Александер, 1964",lvl:"анализ",read:"<b>Читать:</b> часть I — о соответствии формы и контекста.",note:"хороший продукт — это отсутствие несоответствий"},
+  kahneman:{t:"Думай медленно… решай быстро",a:"Даниэль Канеман, 2011",lvl:"просмотр",read:"<b>Читать:</b> части I–II (две системы, эвристики), часть IV — теория перспектив.",note:"откуда берутся ваши и чужие ошибки суждения"},
+  christensen:{t:"Дилемма инноватора",a:"Клейтон Кристенсен, 1997",lvl:"анализ",read:"<b>Читать:</b> введение и главы 1–4.",note:"почему хорошее управление губит компании"},
+  brooks:{t:"Мифический человеко-месяц",a:"Фредерик Брукс, 1975 / 1995",lvl:"просмотр",read:"<b>Читать:</b> заглавное эссе, «Концептуальная целостность» и «Серебряной пули нет».",note:"девять женщин не родят ребёнка за месяц"},
+
+  euclid:{t:"Начала",a:"Евклид",lvl:"анализ",read:"<b>Читать:</b> книга I — определения, постулаты и первые 10–15 предложений с доказательствами.",note:"как строится система из аксиом"},
+  sicp:{t:"Структура и интерпретация компьютерных программ",a:"Абельсон, Сассман, 1985",lvl:"анализ",read:"<b>Читать:</b> главы 1–3, с упражнениями.",note:"программа как способ мышления"},
+  knuthLP:{t:"Грамотное программирование",a:"Дональд Кнут, 1984 (статья)",lvl:"просмотр",read:"<b>Читать:</b> исходную статью Literate Programming целиком.",note:"код пишется для людей"},
+  turing:{t:"Вычислительные машины и разум",a:"Алан Тьюринг, 1950",lvl:"анализ",read:"<b>Читать:</b> статью целиком, особенно раздел о возражениях против мыслящих машин.",note:"игра в имитацию и девять возражений"},
+  geb:{t:"Гёдель, Эшер, Бах",a:"Дуглас Хофштадтер, 1979",lvl:"просмотр",read:"<b>Читать:</b> введение и главы о формальных системах и о самоотносимости; диалоги — для удовольствия.",note:"странные петли и самосознание"},
+
+  wiener:{t:"Кибернетика",a:"Норберт Винер, 1948",lvl:"просмотр",read:"<b>Читать:</b> введение и главу об обратной связи.",note:"управление через обратную связь"},
+  shannon:{t:"Математическая теория связи",a:"Клод Шеннон, 1948",lvl:"анализ",read:"<b>Читать:</b> часть I — источник, канал, энтропия. Математику можно сначала пропустить.",note:"информация как мера неожиданности"},
+  hobbes:{t:"Левиафан",a:"Томас Гоббс, 1651",lvl:"анализ",read:"<b>Для AI:</b> гл. 5 («рассуждение — это счёт»). <b>Для политики:</b> гл. 13–18.",note:"мысль как вычисление — в XVII веке"},
+  minsky:{t:"Общество разума",a:"Марвин Минский, 1986",lvl:"просмотр",read:"<b>Читать:</b> первые 3 главы, дальше — по оглавлению.",note:"разум из неразумных агентов"},
+  aima:{t:"Искусственный интеллект: современный подход",a:"Рассел, Норвиг",lvl:"просмотр",read:"<b>Читать:</b> главы 1–2 (определения ИИ, рациональные агенты) и последнюю главу о философии и будущем.",note:"рабочий словарь области"},
+  bitter:{t:"Горький урок",a:"Ричард Саттон, 2019 (эссе)",lvl:"анализ",read:"<b>Читать:</b> целиком, это одна страница. Затем найти ответные эссе.",note:"масштаб побеждает хитрость?"},
+
+  james:{t:"Принципы психологии",a:"Уильям Джеймс, 1890",lvl:"просмотр",read:"<b>Читать:</b> главы «Привычка», «Поток сознания», «Внимание».",note:"основатель психологии пишет как эссеист"},
+  rogers:{t:"Становление личности",a:"Карл Роджерс, 1961",lvl:"анализ",read:"<b>Читать:</b> части I–II, особенно о характеристиках помогающих отношений.",note:"фундамент коучинговой позиции"},
+  frankl:{t:"Человек в поисках смысла",a:"Виктор Франкл, 1946",lvl:"анализ",read:"<b>Читать:</b> целиком, около 150 страниц.",note:"смысл как то, что выбирают"},
+  epictetus:{t:"Энхиридион",a:"Эпиктет",lvl:"анализ",read:"<b>Читать:</b> целиком, очень короткий текст.",note:"нас тревожат не вещи, а мнения о них — корень КПТ"},
+  bateson:{t:"Шаги в направлении экологии разума",a:"Грегори Бейтсон, 1972",lvl:"просмотр",read:"<b>Читать:</b> «металоги» в начале и статьи о логических уровнях научения.",note:"системный взгляд, из которого вырос эриксоновский подход"},
+  freud:{t:"Введение в психоанализ",a:"Зигмунд Фрейд, 1917",lvl:"просмотр",read:"<b>Читать:</b> лекции об ошибочных действиях (первая часть).",note:"спорьте с ним, но сначала поймите"},
+
+  schumpeter:{t:"Капитализм, социализм и демократия",a:"Йозеф Шумпетер, 1942",lvl:"просмотр",read:"<b>Читать:</b> часть II, гл. 7 «Процесс созидательного разрушения».",note:"конкуренция новым, а не ценой"},
+  drucker:{t:"Эффективный руководитель",a:"Питер Друкер, 1967",lvl:"анализ",read:"<b>Читать:</b> целиком; главы о времени и о вкладе — дважды.",note:"эффективности можно научиться"},
+  machiavelli:{t:"Государь",a:"Никколо Макиавелли, 1532",lvl:"анализ",read:"<b>Читать:</b> целиком; главы 15–18 и 25 (фортуна) — внимательнее всего.",note:"власть как она есть, а не как должна быть"},
+  taleb:{t:"Антихрупкость",a:"Нассим Талеб, 2012",lvl:"просмотр",read:"<b>Читать:</b> книги I–II, остальное — по оглавлению.",note:"что выигрывает от хаоса"},
+  coase:{t:"Природа фирмы",a:"Рональд Коуз, 1937 (статья)",lvl:"анализ",read:"<b>Читать:</b> целиком, около 20 страниц.",note:"зачем вообще нужны компании"},
+
+  thucydides:{t:"История Пелопоннесской войны",a:"Фукидид",lvl:"просмотр",read:"<b>Читать:</b> надгробная речь Перикла (кн. II) и Мелосский диалог (кн. V).",note:"сила против права"},
+  plutarch:{t:"Сравнительные жизнеописания",a:"Плутарх",lvl:"просмотр",read:"<b>Читать:</b> жизнеописания Перикла и Цезаря.",note:"характер решает больше стратегии"},
+
+  vitruvius:{t:"Десять книг об архитектуре",a:"Витрувий",lvl:"просмотр",read:"<b>Читать:</b> книга I — прочность, польза и красота.",note:"три критерия, которым две тысячи лет"},
+  patterns:{t:"Язык шаблонов",a:"Кристофер Александер и др., 1977",lvl:"просмотр",read:"<b>Читать:</b> введение «Как пользоваться этой книгой», затем 10–15 шаблонов подряд.",note:"отсюда же выросли паттерны в программировании"},
+  norman:{t:"Дизайн привычных вещей",a:"Дональд Норман, 1988 / 2013",lvl:"анализ",read:"<b>Читать:</b> главы 1–2 (аффордансы, обратная связь, цикл действия).",note:"когда виновата дверь, а не человек"},
+  poetics:{t:"Поэтика",a:"Аристотель",lvl:"анализ",read:"<b>Читать:</b> целиком, около 50 страниц. Главное — о целом, начале, середине и конце.",note:"первый учебник по драматургии"},
+  kant3:{t:"Критика способности суждения",a:"Иммануил Кант, 1790",lvl:"просмотр",read:"<b>Читать:</b> «Аналитика прекрасного» (§1–22). Трудно, но коротко.",note:"почему вкус претендует на всеобщность"},
+
+  cialdini:{t:"Психология влияния",a:"Роберт Чалдини, 1984",lvl:"просмотр",read:"<b>Читать:</b> по главе на каждый из принципов влияния.",note:"прочитать, чтобы распознавать"},
+  bernays:{t:"Пропаганда",a:"Эдвард Бернейс, 1928",lvl:"анализ",read:"<b>Читать:</b> целиком, короткая книга.",note:"откровенный текст основателя PR"},
+  veblen:{t:"Теория праздного класса",a:"Торстейн Веблен, 1899",lvl:"просмотр",read:"<b>Читать:</b> главы о демонстративном потреблении и демонстративной праздности.",note:"покупают статус, а не вещь"},
+  lebon:{t:"Психология народов и масс",a:"Гюстав Лебон, 1895",lvl:"просмотр",read:"<b>Читать:</b> книга I о душе толпы.",note:"толпа думает образами"},
+
+  keynes:{t:"Общая теория занятости, процента и денег",a:"Джон Мейнард Кейнс, 1936",lvl:"просмотр",read:"<b>Читать:</b> глава 12 — долгосрочные ожидания и «конкурс красоты».",note:"рынок угадывает чужое мнение"},
+  graham:{t:"Разумный инвестор",a:"Бенджамин Грэм, 1949",lvl:"анализ",read:"<b>Читать:</b> главы 8 (мистер Рынок) и 20 (запас прочности).",note:"два понятия, на которых стоит Баффет"},
+  swan:{t:"Чёрный лебедь",a:"Нассим Талеб, 2007",lvl:"просмотр",read:"<b>Читать:</b> часть I — о проблеме индукции и ошибке повествования.",note:"индейка до Дня благодарения"},
+  mackay:{t:"Наиболее распространённые заблуждения и безумства толпы",a:"Чарльз Маккей, 1841",lvl:"просмотр",read:"<b>Читать:</b> главы о тюльпаномании и пузыре Южных морей.",note:"пузыри повторяются"},
+  bernstein:{t:"Против богов: укрощение риска",a:"Питер Бернстайн, 1996",lvl:"просмотр",read:"<b>Читать:</b> целиком как историю идеи вероятности.",note:"как риск стал измеримым"},
+
+  odyssey:{t:"Одиссея",a:"Гомер",lvl:"анализ",read:"<b>Читать:</b> целиком, в переводе, который легко читается вслух.",note:"путешествие героя в исходной форме"},
+  quixote:{t:"Дон Кихот",a:"Мигель де Сервантес, 1605–1615",lvl:"анализ",read:"<b>Читать:</b> часть I, затем вторая — где герои знают, что о них написана книга.",note:"первый роман о чтении"},
+  karamazov:{t:"Братья Карамазовы",a:"Фёдор Достоевский, 1880",lvl:"анализ",read:"<b>Читать:</b> целиком; «Бунт» и «Великий инквизитор» — перечитать отдельно.",note:"спор о свободе внутри романа"},
+  montaigne:{t:"Опыты",a:"Мишель Монтень, 1580",lvl:"просмотр",read:"<b>Читать:</b> «О воспитании детей», «О каннибалах», «Об опыте».",note:"изобретатель эссе"},
+  hamlet:{t:"Гамлет",a:"Уильям Шекспир, ок. 1600",lvl:"анализ",read:"<b>Читать:</b> целиком, лучше дважды — второй раз вслух.",note:"мысль, мешающая действию"},
+
+  galileo:{t:"Беседы и математические доказательства, касающиеся двух новых отраслей науки",a:"Галилео Галилей, 1638",lvl:"просмотр",read:"<b>Читать:</b> третий день — о равномерно ускоренном движении.",note:"рождение эксперимента"},
+  newton:{t:"Математические начала натуральной философии",a:"Исаак Ньютон, 1687",lvl:"просмотр",read:"<b>Читать:</b> определения, законы движения и «Правила умозаключений в физике» в начале книги III.",note:"правила научного рассуждения"},
+  faraday:{t:"История свечи",a:"Майкл Фарадей, 1861",lvl:"анализ",read:"<b>Читать:</b> целиком — шесть популярных лекций.",note:"вся физика в одном пламени"},
+  kuhn:{t:"Структура научных революций",a:"Томас Кун, 1962",lvl:"анализ",read:"<b>Читать:</b> целиком, около 200 страниц.",note:"откуда слово «парадигма»"},
+  feynman:{t:"Характер физических законов",a:"Ричард Фейнман, 1965",lvl:"анализ",read:"<b>Читать:</b> целиком — семь лекций.",note:"как физик угадывает закон"},
+
+  meta:{t:"Метафизика",a:"Аристотель",lvl:"просмотр",read:"<b>Читать:</b> книга I — о мудрости и первых причинах.",note:"все люди от природы стремятся к знанию"},
+  meditations:{t:"Размышления о первой философии",a:"Рене Декарт, 1641",lvl:"анализ",read:"<b>Читать:</b> размышления I–II.",note:"сомнение как метод"},
+  hume:{t:"Исследование о человеческом познании",a:"Дэвид Юм, 1748",lvl:"анализ",read:"<b>Читать:</b> разделы II–VII (идеи, причинность).",note:"почему мы верим, что солнце взойдёт"},
+  kantP:{t:"Пролегомены",a:"Иммануил Кант, 1783",lvl:"анализ",read:"<b>Читать:</b> предисловие и первую часть.",note:"сам Кант о «Критике», только короче"},
+  nietzsche:{t:"По ту сторону добра и зла",a:"Фридрих Ницше, 1886",lvl:"анализ",read:"<b>Читать:</b> главы 1 и 9.",note:"спорить с ним — лучшая тренировка"},
+  phaedo:{t:"Апология Сократа",a:"Платон",lvl:"анализ",read:"<b>Читать:</b> целиком, около 30 страниц.",note:"зачем вообще философствовать"},
+
+  politics:{t:"Политика",a:"Аристотель",lvl:"просмотр",read:"<b>Читать:</b> книга I (полис по природе) и III (гражданин, формы правления).",note:"шесть форм правления"},
+  locke:{t:"Второй трактат о правлении",a:"Джон Локк, 1689",lvl:"анализ",read:"<b>Читать:</b> главы 2, 5, 8–9 и 19.",note:"собственность, согласие, право на восстание"},
+  tocqueville:{t:"Демократия в Америке",a:"Алексис де Токвиль, 1835–1840",lvl:"просмотр",read:"<b>Читать:</b> о тирании большинства и об ассоциациях.",note:"демократия как образ жизни"},
+  mill:{t:"О свободе",a:"Джон Стюарт Милль, 1859",lvl:"анализ",read:"<b>Читать:</b> главы 1–2 (принцип вреда, свобода мысли).",note:"граница власти общества над человеком"},
+  federalist:{t:"Федералист",a:"Гамильтон, Мэдисон, Джей, 1788",lvl:"анализ",read:"<b>Читать:</b> № 10 и № 51.",note:"если бы люди были ангелами…"},
+
+  huizinga:{t:"Homo ludens",a:"Йохан Хёйзинга, 1938",lvl:"анализ",read:"<b>Читать:</b> главы 1–3 (природа игры, магический круг).",note:"игра старше культуры"},
+  caillois:{t:"Игры и люди",a:"Роже Кайуа, 1958",lvl:"анализ",read:"<b>Читать:</b> первые главы с классификацией: агон, алеа, мимикрия, илинкс.",note:"четыре вида игры"},
+  suits:{t:"Кузнечик: игры, жизнь и утопия",a:"Бернард Сьютс, 1978",lvl:"анализ",read:"<b>Читать:</b> целиком; ключевое определение игры — в главе 3.",note:"добровольное преодоление ненужных препятствий"},
+  koster:{t:"Разработка игр и теория развлечений",a:"Раф Костер, 2004",lvl:"просмотр",read:"<b>Читать:</b> целиком, это книга с иллюстрациями на каждом развороте.",note:"удовольствие — это обучение"},
+  schell:{t:"Геймдизайн. Как создать игру, в которую будут играть все",a:"Джесси Шелл, 2008",lvl:"просмотр",read:"<b>Читать:</b> по оглавлению; «линзы» — как чек-листы.",note:"сотня вопросов к своей игре"},
+
+  rob345:{t:"Princeton ROB 345: Introduction to Robotics",a:"Анирудха Маджумдар, курс лекций (видео)",lvl:"анализ",read:"<b>Смотреть:</b> лекции 1–2 (зачем робототехника, поиск пути по графу), затем <a href=\"https://youtu.be/KDIe1094FMo\" target=\"_blank\" rel=\"noopener\">лекция 3 — Randomized planning (RRT)</a>.",note:"смотрим вместе, обсуждаем после"},
+  capek:{t:"R.U.R. (Россумские универсальные роботы)",a:"Карел Чапек, 1920",lvl:"просмотр",read:"<b>Читать:</b> целиком, это короткая пьеса.",note:"здесь появилось само слово «робот»"},
+  asimov:{t:"Я, робот",a:"Айзек Азимов, 1950",lvl:"анализ",read:"<b>Читать:</b> рассказы «Хоровод» и «Улики». Каждый — разбор того, как три закона ломаются на практике.",note:"три закона как первая спецификация безопасности"},
+  braitenberg:{t:"Vehicles: Experiments in Synthetic Psychology",a:"Валентино Брайтенберг, 1984 (на английском)",lvl:"анализ",read:"<b>Читать:</b> первые 5–6 глав: из двух датчиков и двух моторов вырастает видимость характера.",note:"сложное поведение из простой проводки"},
+  rbrooks:{t:"Intelligence without Representation",a:"Родни Брукс, 1991 (статья)",lvl:"анализ",read:"<b>Читать:</b> целиком. Брукс спорит с идеей, что роботу сначала нужна полная модель мира.",note:"мир — сам себе лучшая модель"},
+  moravec:{t:"Mind Children",a:"Ханс Моравек, 1988 (на английском)",lvl:"просмотр",read:"<b>Читать:</b> первые главы — о том, почему восприятие и движение даются машинам труднее шахмат.",note:"парадокс Моравека"},
+  thrun:{t:"Probabilistic Robotics",a:"Трун, Бургард, Фокс, 2005",lvl:"анализ",read:"<b>Читать:</b> главы 1–2: неопределённость как центральная проблема и байесовская оценка состояния.",note:"робот никогда не знает, где он точно"},
+  lavalle:{t:"Planning Algorithms",a:"Стивен Лавалле, 2006 (бесплатно онлайн)",lvl:"анализ",read:"<b>Читать:</b> глава 4 (конфигурационное пространство) и глава 5 (планирование на выборках, RRT) — прямо к лекции 3.",note:"путь робота — это поиск в пространстве"},
+  lynch:{t:"Modern Robotics",a:"Кевин Линч, Фрэнк Парк, 2017 (бесплатно онлайн)",lvl:"анализ",read:"<b>Читать:</b> главы 2–3 (конфигурационное пространство, движение твёрдого тела); к каждой главе есть короткие видео.",note:"учебник с видео, удобно читать группой"},
+
+  polya:{t:"Как решать задачу",a:"Дьёрдь Пойа, 1945",lvl:"анализ",read:"<b>Читать:</b> целиком; таблицу «Как решать задачу» держать перед глазами.",note:"Адлер для решения задач"},
+  courant:{t:"Что такое математика?",a:"Рихард Курант, Герберт Роббинс, 1941",lvl:"просмотр",read:"<b>Читать:</b> главы о натуральных числах и о функциях и пределах.",note:"математика как мир идей, а не процедур"},
+  hardy:{t:"Апология математика",a:"Годфри Харди, 1940",lvl:"анализ",read:"<b>Читать:</b> целиком, около 100 страниц.",note:"красота как критерий"},
+  lakatos:{t:"Доказательства и опровержения",a:"Имре Лакатос, 1976",lvl:"анализ",read:"<b>Читать:</b> глава 1 — диалог в классе о формуле Эйлера для многогранников.",note:"как доказательство спорит с контрпримером"},
+  poincare:{t:"Наука и метод",a:"Анри Пуанкаре, 1908",lvl:"просмотр",read:"<b>Читать:</b> главу о математическом творчестве.",note:"озарение после долгой работы"},
+  strogatz:{t:"Удовольствие от x",a:"Стивен Строгац, 2012",lvl:"просмотр",read:"<b>Читать:</b> по главе за раз, от чисел до бесконечности.",note:"вход для тех, кто давно не решал задач"},
+  linalg:{t:"Essence of Linear Algebra",a:"3Blue1Brown, видеокурс",lvl:"анализ",read:"<b>Смотреть:</b> все серии подряд, с паузами: перед каждой попробуйте предсказать, что будет дальше.",note:"язык, на котором говорит робототехника"},
+  wigner:{t:"Непостижимая эффективность математики в естественных науках",a:"Юджин Вигнер, 1960 (эссе)",lvl:"анализ",read:"<b>Читать:</b> целиком, около 15 страниц.",note:"почему мир вообще описывается формулами?"},
+
+  flp:{t:"Фейнмановские лекции по физике",a:"Ричард Фейнман, 1963",lvl:"анализ",read:"<b>Читать:</b> том 1, главы 1–4 (атомы, физика как наука, энергия).",note:"если бы всё знание погибло, какую фразу оставить?"},
+  einstein:{t:"Эволюция физики",a:"Альберт Эйнштейн, Леопольд Инфельд, 1938",lvl:"анализ",read:"<b>Читать:</b> целиком; формул почти нет.",note:"история идей, а не открытий"},
+  landau:{t:"Физика для всех",a:"Лев Ландау, Александр Китайгородский",lvl:"просмотр",read:"<b>Читать:</b> книгу «Физические тела» — механика и движение.",note:"школьная физика, объяснённая заново"},
+  susskind:{t:"Теоретический минимум",a:"Леонард Сасскинд, Джордж Грабовски, 2013",lvl:"анализ",read:"<b>Читать:</b> классическая механика с первой главы, с упражнениями.",note:"механика для взрослых, которые забыли школу"},
+
+  trivium:{t:"The Trivium: The Liberal Arts of Logic, Grammar, and Rhetoric",a:"Сестра Мириам Джозеф, 1937 (на английском)",lvl:"анализ",read:"<b>Читать:</b> главы о терминах, суждениях и силлогизме. Это прямой учебник к навыкам, на которые опирается Адлер.",note:"грамматика, логика и риторика как одно ремесло"},
+  vinogradov:{t:"Логика. Учебник для средней школы",a:"С. Н. Виноградов, А. Ф. Кузьмин, 1954",lvl:"просмотр",read:"<b>Читать:</b> разделы о понятиях, суждениях, умозаключениях, доказательстве и опровержении.",note:"так логику учили в школе"},
+  ivin:{t:"Искусство правильно мыслить",a:"Александр Ивин, 1986",lvl:"анализ",read:"<b>Читать:</b> целиком, книга написана для старшеклассников.",note:"логика без формул"},
+  povarnin:{t:"Искусство спора. О теории и практике спора",a:"Сергей Поварнин, 1918",lvl:"анализ",read:"<b>Читать:</b> главы о тезисе и доводах, затем об уловках.",note:"как удержать тезис и не дать его подменить"},
+  weston:{t:"Аргументируй это!",a:"Энтони Уэстон",lvl:"анализ",read:"<b>Читать:</b> целиком: короткие правила с примерами, около ста страниц.",note:"правила короткого аргумента"},
+  minto:{t:"Принцип пирамиды Минто",a:"Барбара Минто",lvl:"просмотр",read:"<b>Читать:</b> часть I — пирамида, вертикальная и горизонтальная логика, группировка без пробелов и пересечений.",note:"полнота аргумента на практике"},
+  schopen:{t:"Эристическая диалектика",a:"Артур Шопенгауэр, ок. 1831",lvl:"просмотр",read:"<b>Читать:</b> целиком, это короткий перечень уловок спорщика.",note:"чтобы узнавать уловки, а не применять"},
+  uspensky:{t:"Слово о словах",a:"Лев Успенский, 1954",lvl:"просмотр",read:"<b>Читать:</b> главы о грамматике, включая «глокую куздру» Щербы.",note:"грамматика как смысл без слов"},
+  plungian:{t:"Почему языки такие разные",a:"Владимир Плунгян, 1996",lvl:"анализ",read:"<b>Читать:</b> главы о грамматических значениях.",note:"школьные термины глазами лингвиста"},
+  pinker:{t:"Чувство стиля",a:"Стивен Пинкер, 2014",lvl:"анализ",read:"<b>Читать:</b> главу о синтаксисе: как дерево мысли превращается в строку текста.",note:"синтаксис ради ясности"},
+  gal:{t:"Слово живое и мёртвое",a:"Нора Галь, 1972",lvl:"просмотр",read:"<b>Читать:</b> главы о канцелярите.",note:"грамматика против канцелярита"},
+
+  raskin:{t:"Интерфейс: новые направления в проектировании компьютерных систем",a:"Джеф Раскин, 2000",lvl:"анализ",read:"<b>Можно начать</b> с глав о режимах, монотонности и количественной оценке интерфейса (GOMS, информационная эффективность).",note:"интерфейс, измеренный почти инженерно"},
+  weinschenk:{t:"100 главных принципов дизайна",a:"Сьюзан Вайншенк, 2011",lvl:"просмотр",read:"<b>Можно читать</b> по разделам: восприятие, внимание, память, мотивация — и смотреть, на какие исследования опирается автор.",note:"язык данных для разговора с бизнесом"},
+  monteiro:{t:"Дизайн — это работа",a:"Майк Монтейро, 2012",lvl:"анализ",read:"<b>Интересно</b> проследить его аргументы о профессиональной и этической ответственности дизайнера.",note:"дизайнер отвечает за то, что выпустил"},
+  brown:{t:"Дизайн-мышление в бизнесе",a:"Тим Браун, 2009",lvl:"просмотр",read:"<b>Можно взять</b> главы о понимании людей и генерации идей.",note:"от проблемы пользователя к идее"},
+  ries:{t:"Бизнес с нуля",a:"Эрик Рис, 2011",lvl:"просмотр",read:"<b>Можно взять</b> части о MVP и цикле «создать — измерить — научиться».",note:"гипотеза важнее уверенности"}
+};
+
+const P = [
+  {id:"core",name:"Ядро для всех",q:"Как прожить хорошую жизнь — и что для этого нужно знать?",books:["phaedo","ethics","aurelius","descartes","darwin","tolstoy"]},
+  {id:"trivium",name:"Логика и грамматика",q:"Как из слов получаются мысли — и как проверить, что из одной мысли следует другая?",books:["trivium","vinogradov","ivin","povarnin","weston","minto","schopen","uspensky","plungian","pinker","gal"]},
+  {id:"pm",name:"Продакт-менеджмент",q:"Что значит, что продукт «хорош» — для пользователя, для рынка или для создателя?",books:["rhetoric","simon","alexanderNotes","christensen","kahneman","brooks","smith"]},
+  {id:"ai",name:"AI и интеграция ИИ",q:"Что такое понимание — и может ли оно быть результатом вычисления?",books:["turing","hobbes","shannon","wiener","minsky","geb","aima","bitter"]},
+  {id:"robo",name:"Робототехника",q:"Почему двигаться в реальном мире так трудно — и что должно случиться для «GPT-момента» в робототехнике?",note:"Смотрим вместе: Lecture Club по курсу Princeton ROB 345. Лекции тоже можно читать по Адлеру: до встречи — просмотр слайдов и транскрипта, после — разбор одной идеи с конспектом.",books:["rob345","capek","asimov","wiener","braitenberg","rbrooks","moravec","thrun","lavalle","lynch","linalg"]},
+  {id:"dev",name:"Разработка ПО",q:"Что такое хорошая абстракция и где её пределы?",books:["euclid","descartes","sicp","brooks","knuthLP","turing","geb"]},
+  {id:"psy",name:"Психология и коучинг",q:"Что меняет человека: понимание, опыт или отношения?",books:["epictetus","james","freud","rogers","frankl","bateson","kahneman"]},
+  {id:"biz",name:"Предпринимательство",q:"Откуда берётся ценность и кто её присваивает?",books:["smith","coase","schumpeter","drucker","christensen","machiavelli","taleb"]},
+  {id:"lead",name:"Руководство и лидерство",q:"Насколько руководитель на самом деле управляет событиями?",books:["thucydides","plutarch","machiavelli","aurelius","drucker","tolstoy"]},
+  {id:"sales",name:"Маркетинг и продажи",q:"Где граница между убеждением и манипуляцией?",books:["rhetoric","lebon","veblen","bernays","cialdini","kahneman"]},
+  {id:"fin",name:"Финансы и инвестиции",q:"Можно ли знать будущее достаточно, чтобы на нём зарабатывать?",books:["smith","mackay","keynes","graham","bernstein","swan"]},
+  {id:"design",name:"Дизайн и UX",q:"Что делает форму правильной?",books:["vitruvius","poetics","kant3","alexanderNotes","patterns","simon","norman"]},
+  {id:"pd",name:"Продуктовый дизайн",q:"Как совместить то, как люди на самом деле принимают решения, с творческим поиском и ограничениями бизнеса?",books:["norman","raskin","weinschenk","monteiro","brown","ries","kahneman"]},
+  {id:"games",name:"Геймдизайн и игры",q:"Что делает игру игрой — и почему в неё хочется играть?",books:["huizinga","caillois","suits","poetics","koster","schell"]},
+  {id:"lit",name:"Литература и письмо",q:"Зачем человеку истории?",books:["odyssey","poetics","montaigne","hamlet","quixote","karamazov","tolstoy"]},
+  {id:"sci",name:"Естественные науки",q:"Как мы узнаём, что объяснение верно?",books:["euclid","galileo","newton","darwin","faraday","kuhn","feynman"]},
+  {id:"math",name:"Математика",q:"Откуда берётся математическая уверенность — из доказательства или из интуиции?",books:["euclid","polya","courant","hardy","lakatos","poincare","strogatz","linalg","wigner"]},
+  {id:"phys",name:"Физика",q:"Почему мир вообще описывается математикой?",books:["galileo","newton","faraday","flp","einstein","landau","susskind","feynman","wigner"]},
+  {id:"phil",name:"Философия",q:"Что мы можем знать наверняка?",books:["phaedo","meta","meditations","hume","kantP","nietzsche"]},
+  {id:"pol",name:"Политика и общество",q:"Что оправдывает власть?",books:["plato","politics","hobbes","locke","federalist","tocqueville","mill"]}
+];
+
+const chips = document.getElementById("chips"), out = document.getElementById("out");
+let sel = new Set(["core","trivium"]);
+P.forEach(p=>{
+  const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=p.name;b.dataset.id=p.id;
+  b.setAttribute("aria-pressed",sel.has(p.id));
+  b.onclick=()=>{sel.has(p.id)?sel.delete(p.id):sel.add(p.id);b.setAttribute("aria-pressed",sel.has(p.id));render()};
+  chips.appendChild(b);
+});
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function bookHTML(id,others){
+  const b=B[id];
+  const also=others&&others.length?`<div class="also">Также на полках: ${others.map(esc).join(", ")}</div>`:"";
+  return `<div class="book"><div><p class="t">${esc(b.t)}<a class="lvl" href="#practice" title="Что значит эта пометка">${b.lvl}</a></p><p class="a">${esc(b.a)}</p><p class="read">${b.read}</p>${also}</div><p class="note hand">${esc(b.note)}</p></div>`;
+}
+function render(){
+  const chosen=P.filter(p=>sel.has(p.id));
+  if(!chosen.length){out.innerHTML='<p class="empty">Выберите хотя бы одну область — полка соберётся здесь.</p>';return}
+  const count={};chosen.forEach(p=>p.books.forEach(id=>(count[id]=(count[id]||[]).concat(p.name))));
+  const cross=Object.keys(count).filter(id=>count[id].length>1);
+  let h="";
+  if(cross.length){
+    h+=`<div class="cross"><h3>На пересечении ваших полок</h3><p>${cross.map(id=>`«${esc(B[id].t)}» — ${esc(count[id].join(", "))}`).join("; ")}. Эти книги отвечают сразу на несколько ваших вопросов: начните с них.</p></div>`;
+  }
+  chosen.forEach((p,i)=>{
+    h+=`<details class="profdet"${i===0?" open":""}><summary><h3 class="prof">${esc(p.name)}<span class="cnt">${p.books.length} книг</span></h3></summary><p class="question"><b>Синтопический вопрос:</b> ${esc(p.q)}</p>${p.note?`<p class="question pnote">${esc(p.note)}</p>`:""}`;
+    p.books.forEach(id=>h+=bookHTML(id,count[id].filter(n=>n!==p.name)));
+    h+=`</details>`;
+  });
+  out.innerHTML=h;
+}
+render();
+
+document.getElementById("copy").onclick=async e=>{
+  const txt=document.getElementById("skilltext").textContent,btn=e.currentTarget;
+  try{await navigator.clipboard.writeText(txt);btn.textContent="Скопировано"}
+  catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById("skilltext"));const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Выделено — нажмите Ctrl+C"}
+  setTimeout(()=>btn.textContent="Скопировать",2500);
+};
+</script>
+
+<script>
+/* ===== Тренинг: 15 правил на минимуме ===== */
+(() => {
+const KEY = "adler-sputnik-training-v1";
+const RULE_TEXT = {
+  "1.1": "Определить тип и тематику книги",
+  "1.2": "Как можно более кратко изложить, о чём повествует книга",
+  "1.3": "Перечислить основные части по порядку и проанализировать каждую тем же способом, что и целое",
+  "1.4": "Определить, какие проблемы стремится решить автор",
+  "2.1": "Найти общий язык с автором, интерпретируя его ключевые слова",
+  "2.2": "Найти главные утверждения автора, выделив важные предложения",
+  "2.3": "Обнаружить аргументы автора или построить их из совокупности утверждений",
+  "2.4": "Определить, какие проблемы автор решил, а какие нет; во втором случае выяснить, знает ли автор о нерешённой проблеме",
+  "3а.1": "Не критиковать, пока не завершены анализ и интерпретация: не говорить «согласен», «возражаю» или «решу позже», пока не можете сказать «я понимаю»",
+  "3а.2": "Не возражать из любви к спорам",
+  "3а.3": "Учитывать разницу между знанием и мнением, обосновывая все критические суждения",
+  "3б.1": "Показать, где автору не хватает информации",
+  "3б.2": "Показать, где автор владеет неверной информацией",
+  "3б.3": "Показать, где автор нелогичен",
+  "3б.4": "Показать, где анализ или изложение автора не завершены"
+};
+const RT = k => k + " " + RULE_TEXT[k];
+const DEFAULT_BOOK = "М. Адлер, Ч. Ван Дорен — «Как читать книги»";
+const KINDS = ["Практическая", "Теоретическая: история", "Теоретическая: наука", "Теоретическая: философия", "Художественная"];
+const SOLVED = ["решено", "не решено, автор знает", "не решено, автор не знает"];
+const KIND = {p: "посылка", h: "скрытая посылка", c: "вывод"};
+const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X"];
+const COLORS = ["#FFF1A6","#FFD8CB","#D3E8F7","#D8EECF","#E7DBF6","#FDE0B4"];
+const COL_COLORS = {"Согласен":"#D8EECF","Возражаю":"#FFD8CB","Решу позже":"#D3E8F7",
+  "Не хватает информации":"#FFF1A6","Неверная информация":"#FFD8CB","Нелогичен":"#E7DBF6","Не завершён":"#D3E8F7"};
+const QUIZ = [
+  {q:"«Адлер — старомодный зануда, его давно пора забыть».", a:0, why:"Ярлык вместо довода: нападение на автора, а не на мысль."},
+  {q:"«Адлер не учитывает аудиокниги: ему не хватает информации о том, как читают сегодня».", a:1, why:"Названа линза «Показать, где автору не хватает информации» и её предмет. С таким возражением можно работать."},
+  {q:"«Не дочитал, но уже вижу: всё это ерунда».", a:0, why:"Двойное нарушение: критика до «я понимаю» и суждение без обоснования, то есть мнение вместо знания."},
+  {q:"«Если художественную литературу читают иначе, то 15 правил для неё неполны: где правила для романа?»", a:1, why:"Довод изнутри книги, линза «Показать, где анализ или изложение автора не завершены». Адлер отвечает на это в части III."},
+  {q:"«Я просто всегда против авторитетов».", a:0, why:"Это позиция по любому поводу, а не ответ этой книге. Та самая «любовь к спорам»."},
+  {q:"«Я понимаю, что он называет активным чтением. Но вывод „чем активнее, тем лучше“ не следует: бывает анализ, который убивает удовольствие».", a:1, why:"Сначала «я понимаю», затем линза «Показать, где автор нелогичен» и контрпример. Образцовое возражение."}
+];
+
+const blank = () => ({book: DEFAULT_BOOK, kind: "", topic: "", boards: {}, pins: {}, outline: [], chain: [], solved: {}, quiz: {i: 0, ans: []}, gate: false, unlocked: false});
+let S; try { S = Object.assign(blank(), JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) { S = blank(); }
+Object.values(S.boards).forEach(l => l.forEach(c => { c.id = c.id || "local-" + c.ts; }));   // карточки из прошлых версий
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} refresh(); };
+
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const words = s => (s.trim().match(/\S+/g) || []).length;
+const short = (s, n) => (s = String(s || ""), s.length > n ? s.slice(0, n-1) + "…" : s);
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const list = id => S.boards[id] || (S.boards[id] = []);
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const pinned = (id, key) => list(id).find(c => c.id === S.pins[key]) || list(id)[0] || null;
+const chainOk = () => S.chain.some(l => l.k === "c") && S.chain.some(l => l.k !== "c");
+const inCol = (id, c) => list(id).filter(x => x.col === c).length;
+const extra = (c, label) => ((c && c.extra) || []).find(e => e[0] === label)?.[1] || "";
+const grow = t => { t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 160) + "px"; };
+const onEnter = (els, fn) => els.forEach(el => el.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); fn(); } }));
+function pickGroup(box, onPick) {
+  $$(".tr-pick", box).forEach(b => b.onclick = () => { $$(".tr-pick", box).forEach(x => x.setAttribute("aria-pressed", x === b)); onPick(b); });
+}
+
+/* ---------- доски с карточками ---------- */
+const boards = {};
+$$("#training [data-board]").forEach(el => {
+  const id = el.dataset.board;
+  const cols = el.dataset.columns ? el.dataset.columns.split("|") : null;
+  const fields = el.dataset.fields ? el.dataset.fields.split("|").map(f => ({label: f.replace("*", ""), req: f.endsWith("*")})) : null;
+  const maxw = +el.dataset.maxwords || 0;
+  el.innerHTML = `<div class="tr-dock">
+      <textarea rows="1" placeholder="${esc(fields ? fields[0].label : el.dataset.ph || "Ваша мысль")}"></textarea>
+      ${fields ? fields.slice(1).map(f => `<input class="${f.label.length < 6 ? "short" : ""}" placeholder="${esc(f.label)}">`).join("") : ""}
+      ${maxw ? `<span class="wc">0 / ${maxw} слов</span>` : ""}
+      ${cols ? `<span class="tr-picks">${cols.map((c, i) => `<button type="button" class="tr-pick" aria-pressed="${i === 0}" data-c="${esc(c)}">${esc(c)}</button>`).join("")}</span>` : ""}
+      <button class="tr-add" type="button">Добавить</button></div>
+    <p class="tr-hint">Enter — добавить, Shift+Enter — новая строка${el.dataset.pick ? ". ☆ на карточке — выбрать главную" : ""}</p>
+    ${cols ? `<div class="tr-cols">${cols.map(c => `<div class="tr-col" data-col="${esc(c)}"><h4>${esc(c)}</h4><div class="tr-cards"></div></div>`).join("")}</div>` : `<div class="tr-cards"></div>`}`;
+  const b = {id, el, cols, fields, maxw, pick: el.dataset.pick, require: el.dataset.require,
+    ta: $("textarea", el), inputs: $$(".tr-dock input", el), dock: $(".tr-dock", el), hint: $(".tr-hint", el), col: cols && cols[0]};
+  b.hintText = b.hint.textContent;
+  boards[id] = b;
+  if (cols) pickGroup(b.dock, btn => { b.col = btn.dataset.c; b.ta.focus(); });
+  b.ta.addEventListener("input", () => { grow(b.ta); if (maxw) wordCount(b); });
+  onEnter([b.ta, ...b.inputs], () => addCard(b));
+  $(".tr-add", el).onclick = () => addCard(b);
+  renderBoard(b);
+});
+function wordCount(b) {
+  const n = words(b.ta.value), wc = $(".wc", b.el);
+  wc.textContent = `${n} / ${b.maxw} слов`; wc.classList.toggle("over", n > b.maxw);
+}
+function warn(b, msg) {
+  b.dock.classList.remove("shake"); void b.dock.offsetWidth; b.dock.classList.add("shake");
+  b.hint.textContent = msg; b.hint.classList.add("warn");
+  clearTimeout(b.t); b.t = setTimeout(() => { b.hint.textContent = b.hintText; b.hint.classList.remove("warn"); }, 3500);
+}
+function boxFor(b, c) { return b.cols ? $(`.tr-col[data-col="${CSS.escape(b.cols.includes(c.col) ? c.col : b.cols[0])}"] .tr-cards`, b.el) : $(".tr-cards", b.el); }
+function renderBoard(b) {
+  const cards = list(b.id);
+  $$(".tr-cards", b.el).forEach(x => x.innerHTML = "");
+  cards.forEach(c => boxFor(b, c).appendChild(cardEl(b, c)));
+  if (!cards.length && !b.cols) $(".tr-cards", b.el).innerHTML = '<span class="tr-empty">здесь появятся карточки</span>';
+}
+function cardEl(b, c) {
+  const el = document.createElement("div");
+  const isPin = b.pick && S.pins[b.pick] === c.id;
+  el.className = "tr-card" + (isPin ? " pinned" : "");
+  el.style.setProperty("--rot", (c.rot || 0) + "deg");
+  el.style.background = c.color;
+  el.innerHTML = (b.pick ? `<button class="pin" type="button" title="Выбрать главной">${isPin ? "★" : "☆"}</button>` : "")
+    + `<button class="x" type="button" title="Удалить">×</button>`
+    + `<div class="tx ${c.text.length > 90 ? "l" : ""}">${esc(c.text)}</div>`
+    + (c.extra || []).map(([k, v]) => `<div class="ex"><span>${esc(k)}</span>${esc(v)}</div>`).join("");
+  $(".x", el).onclick = () => {
+    S.boards[b.id] = list(b.id).filter(x => x.id !== c.id);
+    if (b.pick && S.pins[b.pick] === c.id) delete S.pins[b.pick];
+    delete S.solved[c.id];
+    save(); renderBoard(b);
+  };
+  if (b.pick) $(".pin", el).onclick = () => { S.pins[b.pick] = S.pins[b.pick] === c.id ? null : c.id; save(); renderBoard(b); };
+  return el;
+}
+function addCard(b) {
+  const text = b.ta.value.trim(), vals = b.inputs.map(i => i.value.trim());
+  if (!text) return b.fields ? warn(b, `Заполните поле «${b.fields[0].label}»`) : b.ta.focus();
+  if (b.fields) {
+    const miss = b.fields.slice(1).find((f, i) => f.req && !vals[i]);
+    if (miss) return warn(b, /^(Потому|Почему)/.test(miss.label) ? "Нужна причина: «Учитывать разницу между знанием и мнением, обосновывая все критические суждения»" : `Заполните поле «${miss.label}»`);
+  }
+  if (b.require === "?" && !text.includes("?")) return warn(b, "Сформулируйте проблему как вопрос, со знаком «?»");
+  if (b.maxw && words(text) > b.maxw) return warn(b, `Больше ${b.maxw} слов. Правило: «Как можно более кратко изложить, о чём повествует книга»`);
+  const c = {id: newId(), board: b.id, text, ts: Date.now(), col: b.col || "", rot: +(Math.random() * 5 - 2.5).toFixed(2),
+    extra: b.fields ? b.fields.slice(1).map((f, i) => [f.label, vals[i]]).filter(e => e[1]) : [],
+    color: b.cols ? (COL_COLORS[b.col] || COLORS[0]) : COLORS[Math.floor(Math.random() * COLORS.length)]};
+  list(b.id).push(c); save();
+  $(".tr-empty", b.el)?.remove();
+  const card = cardEl(b, c);
+  boxFor(b, c).appendChild(card);
+  fly(b.ta, card, [text, ...vals.filter(Boolean)].join("\n"));
+  b.ta.value = ""; b.inputs.forEach(i => i.value = ""); grow(b.ta); if (b.maxw) wordCount(b); b.ta.focus();
+}
+// набранный текст взлетает из поля, проступает почерком и ложится карточкой
+function fly(from, card, text) {
+  if (reduced) return;
+  const a = from.getBoundingClientRect(), r = card.getBoundingClientRect();
+  const w = card.offsetWidth, h = card.offsetHeight, cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const rot = card.style.getPropertyValue("--rot");
+  const g = card.cloneNode(true);
+  g.classList.add("tr-ghost"); $$(".x, .pin", g).forEach(n => n.remove());
+  const typed = document.createElement("div"); typed.className = "typed"; typed.textContent = text; g.prepend(typed);
+  Object.assign(g.style, {position: "fixed", left: cx - w / 2 + "px", top: cy - h / 2 + "px", width: w + "px", height: h + "px", margin: 0, zIndex: 50});
+  document.body.appendChild(g); card.style.visibility = "hidden";
+  const dx = a.left + Math.min(a.width, w) / 2 - cx, dy = a.top + a.height / 2 - cy, D = 1200;
+  const move = g.animate([
+    {transform: `translate(${dx}px,${dy}px) scale(.92)`},
+    {transform: `translate(${dx}px,${dy - 36}px) scale(1.04)`, offset: .3},
+    {transform: `translate(0,0) scale(1.03) rotate(${rot})`, offset: .88},
+    {transform: `translate(0,0) rotate(${rot})`}], {duration: D, easing: "cubic-bezier(.55,0,.25,1)"});
+  typed.animate([{opacity: 1}, {opacity: 1, filter: "blur(0)", offset: .12}, {opacity: 0, filter: "blur(7px)", offset: .34}, {opacity: 0}], {duration: D, fill: "forwards"});
+  $$(".tx, .ex", g).forEach((n, i) => n.animate([
+    {opacity: 0, clipPath: "inset(0 100% 0 0)"},
+    {opacity: 0, clipPath: "inset(0 100% 0 0)", offset: Math.min(.2 + i * .1, .5)},
+    {opacity: 1, clipPath: "inset(0 0 0 0)", offset: Math.min(.62 + i * .08, .95)},
+    {opacity: 1, clipPath: "inset(0 0 0 0)"}], {duration: D, fill: "forwards"}));
+  move.onfinish = () => { g.remove(); card.style.visibility = ""; };
+}
+const ink = el => { el.classList.remove("tr-ink"); void el.offsetWidth; el.classList.add("tr-ink"); };
+
+/* ---------- 1.1 тип и предмет ---------- */
+$("#trKind").innerHTML = KINDS.map(k => `<button type="button" class="tr-pick" aria-pressed="${S.kind === k}">${k}</button>`).join("");
+pickGroup($("#trKind"), btn => { S.kind = btn.textContent; save(); });
+const setTopic = () => { const v = $("#trTopic").value.trim(); if (!v) return; S.topic = v; $("#trTopic").value = ""; save(); ink($("#trTopicView")); };
+$("#trTopicBtn").onclick = setTopic; onEnter([$("#trTopic")], setTopic);
+$$("#training .tr-reveal > button").forEach(b => b.onclick = () => b.parentElement.classList.toggle("open"));
+
+/* ---------- 1.3 части ---------- */
+function drawOutline() {
+  const box = $("#trOutline");
+  box.innerHTML = S.outline.length ? "" : '<span class="tr-empty">части книги появятся здесь</span>';
+  S.outline.forEach((p, i) => {
+    const row = document.createElement("div"); row.className = "tr-row" + (p.fresh ? " tr-ink" : "");
+    row.innerHTML = `<span class="rn">${ROMAN[i] || i + 1}</span><span class="rt">${esc(p.name)}${p.gist ? ` <small>— ${esc(p.gist)}</small>` : ""}</span><span class="tr-ctl"><button type="button" data-a="up" title="Выше">↑</button><button type="button" data-a="down" title="Ниже">↓</button><button type="button" data-a="x" title="Удалить">×</button></span>`;
+    $(".tr-ctl", row).onclick = e => {
+      const a = e.target.dataset.a, o = S.outline; if (!a) return;
+      if (a === "x") o.splice(i, 1);
+      if (a === "up" && i > 0) [o[i - 1], o[i]] = [o[i], o[i - 1]];
+      if (a === "down" && i < o.length - 1) [o[i + 1], o[i]] = [o[i], o[i + 1]];
+      save(); drawOutline();
+    };
+    box.appendChild(row); delete p.fresh;
+  });
+}
+(() => {
+  const d = $("#trOutlineDock"), ta = $("textarea", d), gist = $("input", d);
+  const add = () => { const n = ta.value.trim(); if (!n) return ta.focus();
+    S.outline.push({name: n, gist: gist.value.trim(), fresh: true}); ta.value = ""; gist.value = ""; save(); drawOutline(); ta.focus(); };
+  $(".tr-add", d).onclick = add; onEnter([ta, gist], add);
+})();
+
+/* ---------- 2.3 цепочка ---------- */
+const chainOrder = () => [...S.chain.map((l, i) => [l, i]).filter(([l]) => l.k !== "c"), ...S.chain.map((l, i) => [l, i]).filter(([l]) => l.k === "c")];
+function drawChain() {
+  const box = $("#trChain"); box.innerHTML = "";
+  if (!S.chain.length) { box.innerHTML = '<span class="tr-empty">посылка + посылка ⇒ вывод</span>'; return; }
+  const order = chainOrder();
+  order.forEach(([l, i], n) => {
+    if (n) { const ar = document.createElement("span"); ar.className = "tr-arrow";
+      ar.innerHTML = l.k === "c" ? "⇒<small>следовательно</small>" : "+"; box.appendChild(ar); }
+    const el = document.createElement("div"); el.className = "tr-link " + l.k + (l.fresh ? " tr-ink" : "");
+    el.innerHTML = `<div class="k">${KIND[l.k]}${l.page ? " · с. " + esc(l.page) : ""}</div><div class="t">${esc(l.t)}</div><span class="tr-ctl"><button type="button" data-a="l" title="Раньше">←</button><button type="button" data-a="r" title="Позже">→</button><button type="button" data-a="x" title="Удалить">×</button></span>`;
+    $(".tr-ctl", el).onclick = e => {
+      const a = e.target.dataset.a, c = S.chain, pos = order.map(([, j]) => j), at = pos.indexOf(i); if (!a) return;
+      if (a === "x") c.splice(i, 1);
+      if (a === "l" && at > 0) { const j = pos[at - 1]; [c[i], c[j]] = [c[j], c[i]]; }
+      if (a === "r" && at < pos.length - 1) { const j = pos[at + 1]; [c[i], c[j]] = [c[j], c[i]]; }
+      save(); drawChain();
+    };
+    box.appendChild(el); delete l.fresh;
+  });
+}
+(() => {
+  const d = $("#trChainDock"), ta = $("textarea", d), pg = $("input", d); let k = "p";
+  pickGroup(d, btn => { k = btn.dataset.k; ta.focus(); });
+  const add = () => { const t = ta.value.trim(); if (!t) return ta.focus();
+    if (k === "c") S.chain = S.chain.filter(l => l.k !== "c"); // вывод в цепочке один
+    S.chain.push({t, k, page: pg.value.trim(), fresh: true}); ta.value = ""; pg.value = ""; grow(ta); save(); drawChain(); ta.focus(); };
+  $(".tr-add", d).onclick = add; onEnter([ta, pg], add); ta.addEventListener("input", () => grow(ta));
+})();
+
+/* ---------- 2.4 решено ли ---------- */
+function drawSolved() {
+  const box = $("#trSolved"), probs = list("problems");
+  const sig = probs.map(p => p.id + ":" + S.solved[p.id]).join();
+  if (box.dataset.sig === sig) return;
+  box.dataset.sig = sig;
+  box.innerHTML = probs.length ? "" : '<span class="tr-empty">сначала запишите вопросы автора выше</span>';
+  probs.forEach(p => {
+    const row = document.createElement("div"); row.className = "tr-srow";
+    row.innerHTML = `<span class="rt">${esc(p.text)}</span><span class="tr-picks">${SOLVED.map((s, k) => `<button type="button" class="tr-pick" aria-pressed="${S.solved[p.id] === k}" data-k="${k}">${s}</button>`).join("")}</span>`;
+    $$(".tr-pick", row).forEach(btn => btn.onclick = () => { const k = +btn.dataset.k; S.solved[p.id] = S.solved[p.id] === k ? null : k; save(); });
+    box.appendChild(row);
+  });
+}
+
+/* ---------- 3а.1 ворота «я понимаю» ---------- */
+function gateItems() {
+  const w = pinned("terms", "word"), s = pinned("sentences", "sentence"), ph = pinned("whole", "phrase");
+  return [
+    [RT("1.1"), !!(S.kind || S.topic), [S.kind, S.topic].filter(Boolean).join(" · ")],
+    [RT("1.2"), !!ph, ph && ph.text],
+    [RT("1.4"), list("problems").length > 0, list("problems").length ? list("problems").length + " шт." : ""],
+    [RT("2.1"), !!w, w && w.text],
+    [RT("2.2"), !!s, s && s.text],
+    [RT("2.3"), chainOk(), (S.chain.find(l => l.k === "c") || {}).t]
+  ];
+}
+function drawGate() {
+  $("#trGate").innerHTML = gateItems().map(([t, ok, v]) => `<li class="${ok ? "ok" : ""}"><span class="mk">${ok ? "✓" : ""}</span><span>${esc(t)}</span><span class="gv">${esc(v || "")}</span></li>`).join("");
+  $("#trGateManual").checked = $("#trGateManual").checked || S.gate;
+  $("#trGateBtn").disabled = !$("#trGateManual").checked;
+  $("#trGateBtn").hidden = S.gate;
+  $("#trGateReset").hidden = !S.gate;
+  if (S.gate && !$("#trStamp").innerHTML) $("#trStamp").innerHTML = '<span class="tr-stamp">Я понимаю</span>';
+  if (!S.gate) $("#trStamp").innerHTML = "";
+  $$("#training [data-gated]").forEach(el => el.classList.toggle("on", !S.gate && !S.unlocked));
+}
+$("#trGateManual").onchange = drawGate;
+$("#trGateBtn").onclick = () => { S.gate = true; save(); $("#trStamp").innerHTML = '<span class="tr-stamp hit">Я понимаю</span>'; };
+$("#trGateReset").onclick = () => { S.gate = false; S.unlocked = false; $("#trGateManual").checked = false; save(); };
+$$("#training [data-unlock]").forEach(b => b.onclick = () => { S.unlocked = true; save(); });
+
+/* ---------- 3а.2 квиз ---------- */
+function drawQuiz() {
+  const box = $("#trQuiz"), st = S.quiz;
+  if (st.i >= QUIZ.length) {
+    const ok = st.ans.filter(Boolean).length;
+    box.innerHTML = `<p class="q">${ok} из ${QUIZ.length}</p><p class="tr-task">${ok === QUIZ.length ? "Безупречно." : "Спорные реплики стоит обсудить вслух."}</p><button class="tr-ghostbtn" type="button">Пройти заново</button>`;
+    $("button", box).onclick = () => { S.quiz = {i: 0, ans: []}; save(); drawQuiz(); };
+    return;
+  }
+  const q = QUIZ[st.i], done = st.ans[st.i] !== undefined && st.ans[st.i] !== null;
+  box.innerHTML = `<div class="meta">Реплика ${st.i + 1} из ${QUIZ.length}</div><p class="q">${esc(q.q)}</p>
+    <div class="opts">${["Спор ради спора", "Обоснованное возражение"].map((o, k) => `<button type="button" class="opt ${done && k === q.a ? "right" : ""} ${done && k === st.pick && k !== q.a ? "wrong" : ""}" data-k="${k}" ${done ? "disabled" : ""}>${o}</button>`).join("")}</div>
+    ${done ? `<p class="why">${esc(q.why)}</p><button class="tr-add" type="button" id="trQuizNext">${st.i < QUIZ.length - 1 ? "Следующая реплика" : "Итог"}</button>` : ""}`;
+  $$(".opt", box).forEach(b => b.onclick = () => { const k = +b.dataset.k; st.pick = k; st.ans[st.i] = k === q.a; save(); drawQuiz(); });
+  if (done) $("#trQuizNext").onclick = () => { st.i++; delete st.pick; save(); drawQuiz(); };
+}
+
+/* ---------- трекер минимума, итог, карта правил ---------- */
+const RULES = [
+  ["1.1", 0, () => !!(S.kind || S.topic), "r1-1"],
+  ["1.2", 0, () => list("whole").length > 0, "r1-2"],
+  ["1.3", 0, () => S.outline.length > 0, "r1-3"],
+  ["1.4", 0, () => list("problems").length > 0, "r1-4"],
+  ["2.1", 1, () => list("terms").length > 0, "r2-1"],
+  ["2.2", 1, () => list("sentences").length > 0, "r2-2"],
+  ["2.3", 1, chainOk, "r2-3"],
+  ["2.4", 1, () => Object.values(S.solved).some(v => v != null), "r2-4"],
+  ["3а.1", 2, () => S.gate, "r3a-1"],
+  ["3а.2", 2, () => S.quiz.i >= QUIZ.length, "r3a-2"],
+  ["3а.3", 2, () => list("critique").length > 0, "r3a-3"],
+  ["3б.1", 3, () => inCol("lenses", "Не хватает информации") > 0, "r3b"],
+  ["3б.2", 3, () => inCol("lenses", "Неверная информация") > 0, "r3b"],
+  ["3б.3", 3, () => inCol("lenses", "Нелогичен") > 0, "r3b"],
+  ["3б.4", 3, () => inCol("lenses", "Не завершён") > 0, "r3b"]
+];
+const GROUPS = ["1. Анализ структуры книги", "2. Интерпретация содержания книги", "3а. Критика книги как средства передачи знаний", "3б. Специфические параметры критики"];
+function drawMin() {
+  const w = pinned("terms", "word"), s = pinned("sentences", "sentence");
+  $("#trMin").innerHTML = `<span class="lbl">минимум:</span>
+    <a class="tr-slot ${w ? "ok" : ""}" href="#r2-1" style="text-decoration:none">${w ? "✓ «" + esc(short(w.text, 18)) + "»" : "○ слово"}</a>
+    <a class="tr-slot ${s ? "ok" : ""}" href="#r2-2" style="text-decoration:none">${s ? "✓ предложение" : "○ предложение"}</a>
+    <a class="tr-slot ${chainOk() ? "ok" : ""}" href="#r2-3" style="text-decoration:none">${chainOk() ? "✓ цепочка" : "○ цепочка"}</a>
+    <a class="prog" href="#trResult">ядро: ${RULES.slice(0, 8).filter(r => r[2]()).length} / 8 · критика: ${RULES.slice(8).filter(r => r[2]()).length} / 7</a>`;
+}
+function drawSummary() {
+  const w = pinned("terms", "word"), s = pinned("sentences", "sentence"), ph = pinned("whole", "phrase");
+  const cell = (k, v, star) => `<div class="${star ? "star" : ""}">${k}<div class="hv ${v ? "" : "none"}">${v ? esc(v) : "пока пусто"}</div></div>`;
+  const chain = chainOrder().map(([l]) => (l.k === "c" ? "⇒ " : l.k === "h" ? "(+) " : "+ ") + l.t).join("\n");
+  $("#trSum").innerHTML =
+      cell("★ " + RT("2.1"), w && w.text + (extra(w, "Как понимает автор") ? "\n→ " + extra(w, "Как понимает автор") : ""), 1)
+    + cell("★ " + RT("2.2"), s && "«" + s.text + "»" + (extra(s, "Стр.") ? " (с. " + extra(s, "Стр.") + ")" : ""), 1)
+    + cell("★ " + RT("2.3"), chain, 1)
+    + cell(RT("1.1"), [S.kind, S.topic].filter(Boolean).join(" · "))
+    + cell(RT("1.2"), ph && ph.text)
+    + cell(RT("1.3"), S.outline.map((p, i) => (ROMAN[i] || i + 1) + ". " + p.name).join("\n"))
+    + cell(RT("3а.3"), list("critique").length ? boards.critique.cols.map(c => `${c}: ${inCol("critique", c)}`).join(" · ") : "")
+    + cell("3б.1–3б.4 Показать, где автору не хватает информации, где он владеет неверной информацией, где он нелогичен, где его анализ не завершён", list("lenses").length ? boards.lenses.cols.filter(c => inCol("lenses", c)).map(c => `${c}: ${inCol("lenses", c)}`).join("\n") : "")
+    + cell("И что с того? Четвёртый вопрос активного читателя", (list("sowhat")[0] || {}).text);
+  $("#trMap").innerHTML = GROUPS.map((g, gi) => `<div><h4>${g}</h4>${RULES.filter(r => r[1] === gi).map(r => `<a href="#${r[3]}" class="${r[2]() ? "ok" : ""}"><b>${r[0]}</b>${RULE_TEXT[r[0]]}</a>`).join("")}</div>`).join("");
+}
+function refresh() {
+  $("#trTopicView").textContent = S.topic;
+  drawMin(); drawSolved(); drawGate(); drawSummary();
+}
+
+/* ---------- конспект в формате скилла adler-reading ---------- */
+function notes() {
+  const L = [], md = s => String(s || "").replace(/\n/g, " ").replace(/\|/g, "/");
+  const sec = (t, rows) => L.push("", "## " + t, ...(rows.length ? rows : ["- …"]));
+  L.push(`# ${S.book}`, `Тип: ${[S.kind, S.topic].filter(Boolean).join("; ") || "…"}`, "Режим: analyze (тренинг-минимум)",
+    `Статус: тренинг в книжном клубе, ${new Date().toLocaleDateString("ru-RU")}; пройдено правил: ${RULES.filter(r => r[2]()).length}/15`);
+  const ph = pinned("whole", "phrase");
+  sec("Единство книги", ph ? [md(ph.text)] : []);
+  sec("План", S.outline.map((p, i) => `- Часть ${ROMAN[i] || i + 1}: ${md(p.name)}${p.gist ? " — " + md(p.gist) : ""}`));
+  sec("Проблемы автора", list("problems").map(p => `- ${md(p.text)}${S.solved[p.id] != null ? ` → ${SOLVED[S.solved[p.id]]}` : ""}`));
+  L.push("", "## Термины", "| Слово | Значение у автора | Где |", "|---|---|---|",
+    ...list("terms").map(c => `| ${md(c.text)}${S.pins.word === c.id ? " ★" : ""} | ${md(extra(c, "Как понимает автор"))}${extra(c, "В обычной речи") ? ` (в обычной речи: ${md(extra(c, "В обычной речи"))})` : ""} | ${md(extra(c, "Стр."))} |`));
+  sec("Ключевые суждения", list("sentences").map(c => `- «${md(c.text)}»${extra(c, "Стр.") ? ` (с. ${md(extra(c, "Стр."))})` : ""} — своими словами: ${md(extra(c, "Своими словами"))}${S.pins.sentence === c.id ? " ★" : ""}`));
+  sec("Аргументы", S.chain.length ? [`- ${chainOrder().map(([l]) => (l.k === "h" ? "[скрытая] " : "") + md(l.t) + (l.page ? ` (с. ${md(l.page)})` : "")).join(" → ")}`] : []);
+  sec("Критика", [`- Понял ли я? ${S.gate ? "Да, ворота «я понимаю» пройдены" : "Ещё нет"}`,
+    ...list("critique").map(c => `- ${c.col}: ${md(c.text)}, потому что ${md(extra(c, "Потому что…"))}`),
+    ...list("lenses").map(c => `- ${c.col}: ${md(c.text)} — ${md(extra(c, "Почему вы так считаете"))}`)]);
+  sec("Что с того", list("sowhat").map(c => `- ${md(c.text)}`));
+  sec("Открытые вопросы", list("problems").filter(p => S.solved[p.id] === 1 || S.solved[p.id] === 2).map(p => `- ${md(p.text)}`));
+  sec("Тренировка", [`- ${new Date().toISOString().slice(0, 10)}: тренинг по 15 правилам на минимуме. Не пройдены: ${RULES.filter(r => !r[2]()).map(r => RT(r[0])).join("; ") || "нет"}`]);
+  return L.join("\n") + "\n";
+}
+$("#trExport").onclick = () => {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([notes()], {type: "text/markdown"}));
+  a.download = "adler-trening-" + new Date().toISOString().slice(0, 10) + ".md";
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+$("#trCopy").onclick = async e => {
+  const btn = e.currentTarget;
+  try { await navigator.clipboard.writeText(notes()); btn.textContent = "Скопировано"; } catch (_) { btn.textContent = "Не удалось, скачайте .md"; }
+  setTimeout(() => btn.textContent = "Скопировать конспект", 2500);
+};
+$("#trReset").onclick = () => {
+  if (!confirm("Стереть все ответы тренинга в этом браузере? Сначала можно скачать конспект.")) return;
+  const book = S.book; S = blank(); S.book = book; save();
+  Object.values(boards).forEach(renderBoard); drawOutline(); drawChain(); drawQuiz();
+  $$("#trKind .tr-pick").forEach(b => b.setAttribute("aria-pressed", "false"));
+};
+$("#trBook").value = S.book;
+$("#trBook").addEventListener("input", e => { S.book = e.target.value.trim() || DEFAULT_BOOK; save(); });
+
+drawOutline(); drawChain(); drawQuiz(); refresh();
+})();
+</script>
+</body>
+</html>
