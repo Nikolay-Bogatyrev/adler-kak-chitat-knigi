@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Читалка фрагмента · «Как читать книги» Адлера</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,800;1,7..72,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEEE6; --sheet:#F6F7F2; --ink:#1E2740; --graphite:#5E6472; --rule:#C9CDC0;
+  --mark:#F2DC5D; --margin:#9E2B2B; --chip:#E1E4D8;
+  --c-term:#2E4A7A; --c-claim:#9E2B2B; --c-arg:#B8860B; --c-problem:#6B4FA0; --c-star:#C0562E;
+  --c-part:#3F7A4A; --c-dot:#5E6472; --c-objection:#B03A2E; --c-agree:#3F7A4A; --c-relevant:#1F7A7A; --c-note:#5E6472;
+  --hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#151A28;--sheet:#1C2233;--ink:#E4E6DE;--graphite:#A3A8B5;--rule:#343C52;--mark:#7A6A12;--margin:#E48A80;--chip:#252C40;
+    --c-term:#8DB0E8;--c-claim:#E48A80;--c-arg:#E2C15A;--c-problem:#B9A2E8;--c-star:#F09A6E;--c-part:#8CCB97;--c-objection:#F08A7E;--c-agree:#8CCB97;--c-relevant:#7FD0D0}
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:"Literata",Georgia,serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+.hand{font-family:var(--hand)}
+
+/* ---------- каркас ---------- */
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top-in{display:flex;align-items:center;gap:10px;padding:8px 16px;flex-wrap:wrap}
+.top h1{font-size:17px;margin:0;font-weight:800;white-space:nowrap}
+.top .where{font-size:14px;color:var(--graphite);white-space:nowrap}
+.top .sp{flex:1}
+.tbtn{font-size:14px;background:var(--chip);border:1px solid transparent;border-radius:999px;padding:5px 12px}
+.tbtn:hover{border-color:var(--graphite)}
+.tbtn[aria-pressed="true"]{border-color:var(--ink);background:linear-gradient(transparent 18%,var(--mark) 18%,var(--mark) 88%,transparent 88%)}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr) 340px;min-height:calc(100vh - 50px)}
+.side{position:sticky;top:50px;height:calc(100vh - 50px);overflow:auto;padding:14px 16px;border-right:1px solid var(--rule);font-size:15px}
+.side.right{border-right:0;border-left:1px solid var(--rule)}
+.side h2{font-size:15px;margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em;color:var(--graphite)}
+.side h2:first-child{margin-top:0}
+main{min-width:0;padding:0 28px 120px}
+@media (max-width:1180px){.layout{grid-template-columns:240px minmax(0,1fr)}.side.right{display:none}.side.right.open{display:block;position:fixed;inset:50px 0 0 auto;width:min(380px,92vw);background:var(--paper);z-index:15;box-shadow:-10px 0 30px -10px rgba(0,0,0,.3)}}
+@media (max-width:820px){
+  body{font-size:17px}
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .side.left{display:none}.side.left.open{display:block;position:fixed;inset:50px auto 0 0;width:min(320px,88vw);background:var(--paper);z-index:15;box-shadow:10px 0 30px -10px rgba(0,0,0,.3)}
+  main{padding:0 16px 140px}
+  .top h1{display:none}
+}
+.only-narrow{display:none}
+@media (max-width:1180px){.only-narrow.r{display:inline-block}}
+@media (max-width:820px){.only-narrow.l{display:inline-block}}
+
+/* ---------- подсказка «как мы сейчас читаем» ---------- */
+.mode{margin:16px 0 8px;background:var(--sheet);border-left:4px solid var(--margin);padding:12px 16px 12px}
+.mode .now{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite)}
+.mode h3{margin:2px 0 4px;font-size:21px;line-height:1.25}
+.mode .goal{margin:0;font-size:16px}
+.mode .qs{font-family:var(--hand);font-size:23px;line-height:1.15;color:var(--margin);margin:6px 0 2px}
+.mode details{margin-top:6px;font-size:15px}
+.mode summary{cursor:pointer;color:var(--graphite)}
+.mode ul{margin:6px 0 0;padding-left:20px}
+.mode .rules{margin:8px 0 0;padding:0;list-style:none;font-size:14px}
+.mode .rules li{margin:3px 0;padding-left:10px;border-left:3px solid var(--rule)}
+.mode .rules b{color:var(--margin);margin-right:6px}
+.modes{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.modes .tbtn{font-size:13px;padding:4px 10px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:14px}
+.legend span{white-space:nowrap}
+
+/* ---------- текст ---------- */
+.pagehead{position:sticky;top:50px;z-index:5;display:flex;justify-content:space-between;gap:10px;background:var(--paper);border-bottom:1px dashed var(--rule);padding:6px 0 4px;margin-top:34px;font-size:13px;color:var(--graphite);letter-spacing:.03em}
+.pagehead b{color:var(--ink);font-weight:600}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:18px;align-items:start}
+@media (max-width:980px){.row{grid-template-columns:minmax(0,1fr)}}
+.txt{max-width:40em;margin:.7em 0;text-align:left;hyphens:auto}
+.txt.h{font-weight:800;font-size:1.2em;line-height:1.3;margin-top:1.2em}
+.txt.toc{margin:.15em 0;font-size:.92em}
+.notes{display:flex;flex-direction:column;gap:6px;padding-top:.7em}
+.mnote{font-family:var(--hand);font-size:21px;line-height:1.05;color:var(--nc,var(--margin));border-left:2px solid var(--nc,var(--margin));padding:0 0 0 8px;cursor:pointer;transform:rotate(-.6deg)}
+.mnote small{display:block;font-family:"Literata",serif;font-size:11px;letter-spacing:.05em;text-transform:uppercase;opacity:.75}
+@media (max-width:980px){.notes{padding:0 0 0 14px;margin-top:-4px}}
+::selection{background:var(--mark);color:var(--ink)}
+
+/* пометки в тексте */
+.m{cursor:pointer;border-radius:2px}
+.m-term{box-shadow:inset 0 0 0 1.5px var(--c-term);border-radius:999px;padding:0 1px}
+.m-claim{background:linear-gradient(var(--c-claim),var(--c-claim)) 0 100%/100% 2px no-repeat}
+.m-arg{background:color-mix(in srgb,var(--c-arg) 26%,transparent)}
+.m-problem{background:color-mix(in srgb,var(--c-problem) 18%,transparent)}
+.m-star{background:color-mix(in srgb,var(--c-star) 16%,transparent)}
+.m-part{background:color-mix(in srgb,var(--c-part) 20%,transparent)}
+.m-dot{text-decoration:underline dotted var(--c-dot) 2px;text-underline-offset:4px}
+.m-objection{text-decoration:underline wavy var(--c-objection) 1.5px;text-underline-offset:4px}
+.m-agree{text-decoration:underline double var(--c-agree);text-underline-offset:4px}
+.m-relevant{background:color-mix(in srgb,var(--c-relevant) 20%,transparent)}
+.m-note{text-decoration:underline dashed var(--c-note) 1.5px;text-underline-offset:4px}
+.m[data-n]::after{content:attr(data-n);font-family:var(--hand);font-weight:700;font-size:.95em;color:var(--c-arg);vertical-align:super;margin-left:1px}
+.m[data-star]::before{content:"★";color:var(--c-star);font-size:.8em;margin-right:1px}
+.m[data-q]::after{content:"?";font-family:var(--hand);font-weight:700;color:var(--c-problem);margin-left:1px}
+.m.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%,40%{background-color:var(--mark)}}
+
+/* ---------- панель пометки ---------- */
+.bar{position:fixed;z-index:30;display:none;flex-wrap:wrap;gap:4px;max-width:min(560px,94vw);background:var(--ink);color:var(--paper);border-radius:12px;padding:6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}
+.bar.on{display:flex}
+.bar button{border:0;background:transparent;color:inherit;border-radius:8px;padding:5px 9px;font-size:14px;white-space:nowrap}
+.bar button:hover{background:rgba(255,255,255,.14)}
+.bar button.rec{background:rgba(255,255,255,.12);font-weight:600}
+.bar .sep{width:1px;background:rgba(255,255,255,.25);margin:2px 3px}
+.bar .tip{flex-basis:100%;font-size:12px;opacity:.75;padding:0 6px}
+@media (max-width:820px){.bar{left:8px!important;right:8px;bottom:10px;top:auto!important;max-width:none}}
+
+.sheet{position:fixed;z-index:40;inset:auto 0 0 0;display:none;justify-content:center;padding:12px}
+.sheet.on{display:flex}
+.sheet-in{width:min(640px,100%);background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:14px 16px;box-shadow:0 -10px 40px -10px rgba(0,0,0,.35)}
+.sheet h3{margin:0;font-size:18px}
+.sheet .rule{font-size:13px;color:var(--graphite);margin:4px 0 8px;border-left:3px solid var(--margin);padding-left:8px}
+.sheet .rule b{color:var(--margin)}
+.sheet label{display:block;font-size:13px;color:var(--graphite);margin:8px 0 3px}
+.sheet textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;resize:vertical;min-height:44px}
+.sheet textarea.c{font-family:var(--hand);font-size:23px;line-height:1.15;color:var(--margin)}
+.sheet .row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.sheet .chk{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--ink);margin:0}
+.btn{font-size:15px;background:var(--ink);color:var(--paper);border:0;padding:8px 16px;border-radius:6px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.danger{background:transparent;color:var(--margin);border:1px solid var(--margin)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;background:var(--chip);border:1px solid transparent;border-radius:999px;padding:4px 10px}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:linear-gradient(transparent 18%,var(--mark) 18%,var(--mark) 88%,transparent 88%)}
+
+/* ---------- левая и правая колонки ---------- */
+.nav a{display:block;text-decoration:none;padding:3px 0;color:var(--graphite);line-height:1.3}
+.nav a:hover,.nav a.cur{color:var(--ink)}
+.nav a.sec{color:var(--ink);font-weight:600;margin-top:6px}
+.nav a.pg{padding-left:12px;font-size:14px}
+.nav a.cur::before{content:"▸ ";color:var(--margin)}
+.search input{width:100%;font:inherit;font-size:15px;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:6px 10px;color:var(--ink)}
+.hits{margin-top:6px;font-size:14px}
+.hits a{display:block;text-decoration:none;color:var(--graphite);padding:3px 0;border-bottom:1px solid var(--rule)}
+.hits mark{background:var(--mark);color:var(--ink)}
+.nlist{display:flex;flex-direction:column;gap:8px}
+.nitem{background:var(--sheet);border-left:3px solid var(--nc,var(--graphite));padding:7px 10px;font-size:14px;cursor:pointer}
+.nitem .meta{font-size:12px;color:var(--graphite);display:flex;gap:6px;flex-wrap:wrap}
+.nitem .q{margin:2px 0}
+.nitem .c{font-family:var(--hand);font-size:20px;line-height:1.05;color:var(--margin)}
+.nitem .acts{display:flex;gap:6px;margin-top:4px}
+.nitem .acts button{font-size:12px;border:1px solid var(--rule);background:transparent;border-radius:4px;padding:1px 7px}
+.filters{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.filters .chip{font-size:12px;padding:2px 8px}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tools .btn{font-size:13px;padding:5px 10px}
+
+/* ---------- открытие файла ---------- */
+.open{max-width:640px;margin:60px auto;padding:24px;background:var(--sheet);border:2px dashed var(--rule);border-radius:14px;text-align:center}
+.open.drag{border-color:var(--margin)}
+.open h2{margin:0 0 8px;font-size:24px}
+.open p{color:var(--graphite);font-size:16px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:8px 16px;border-radius:999px;font-size:14px;z-index:50;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="top-in">
+  <button class="tbtn only-narrow l" id="navBtn" type="button">☰ разделы</button>
+  <h1>Читалка фрагмента</h1>
+  <span class="where" id="where"></span>
+  <span class="sp"></span>
+  <a class="tbtn" href="./#training" style="text-decoration:none">«Спутник» →</a>
+  <button class="tbtn only-narrow r" id="notesBtn" type="button">пометки <span id="ncount">0</span></button>
+</div></header>
+
+<div class="layout">
+  <aside class="side left" id="left">
+    <h2>Поиск</h2>
+    <div class="search"><input id="q" type="search" placeholder="слово или фраза"><div class="hits" id="hits"></div></div>
+    <h2>Разделы и страницы</h2>
+    <nav class="nav" id="nav"></nav>
+    <h2>Файл</h2>
+    <div class="tools"><button class="btn ghost" id="replaceBtn" type="button">Открыть другой текст</button></div>
+    <p style="font-size:13px;color:var(--graphite)">Текст и пометки хранятся только в этом браузере. Сервера нет.</p>
+  </aside>
+
+  <main id="main">
+    <section class="mode" id="mode"></section>
+    <div id="text"></div>
+    <div class="open" id="open" hidden>
+      <h2>Откройте текст фрагмента</h2>
+      <p>Файл <b>.txt</b> с разметкой страниц, который прислал ведущий. Он откроется прямо в браузере: никуда не загружается и запоминается здесь же.</p>
+      <p><label class="btn" style="display:inline-block;cursor:pointer">Выбрать файл<input type="file" accept=".txt,text/plain" id="file" hidden></label></p>
+      <p>или перетащите файл сюда</p>
+    </div>
+  </main>
+
+  <aside class="side right" id="right">
+    <h2>Пометки</h2>
+    <div class="filters" id="filters"></div>
+    <div class="nlist" id="nlist"></div>
+    <div class="tools">
+      <button class="btn" id="exportMd" type="button">Скачать пометки (.md)</button>
+      <button class="btn ghost" id="exportJson" type="button">Резервная копия</button>
+      <label class="btn ghost" style="cursor:pointer">Восстановить<input type="file" accept=".json" id="importJson" hidden></label>
+    </div>
+  </aside>
+</div>
+
+<div class="bar" id="bar"></div>
+<div class="sheet" id="sheet"><div class="sheet-in" id="sheetIn"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+/* ================= правила и способы чтения ================= */
+const RULE = {
+  "1.1": "Определить тип и тематику книги",
+  "1.2": "Как можно более кратко изложить, о чём повествует книга",
+  "1.3": "Перечислить основные части по порядку и проанализировать каждую тем же способом, что и целое",
+  "1.4": "Определить, какие проблемы стремится решить автор",
+  "2.1": "Найти общий язык с автором, интерпретируя его ключевые слова",
+  "2.2": "Найти главные утверждения автора, выделив важные предложения",
+  "2.3": "Обнаружить аргументы автора или построить их из совокупности утверждений",
+  "2.4": "Определить, какие проблемы автор решил, а какие нет; во втором случае выяснить, знает ли автор о нерешённой проблеме",
+  "3а.1": "Не критиковать, пока не завершены анализ и интерпретация: не говорить «согласен», «возражаю» или «решу позже», пока не можете сказать «я понимаю»",
+  "3а.2": "Не возражать из любви к спорам",
+  "3а.3": "Учитывать разницу между знанием и мнением, обосновывая все критические суждения",
+  "3б.1": "Показать, где автору не хватает информации",
+  "3б.2": "Показать, где автор владеет неверной информацией",
+  "3б.3": "Показать, где автор нелогичен",
+  "3б.4": "Показать, где анализ или изложение автора не завершены"
+};
+// Пометки — та же система, что на слайде «Система пометок».
+const MARKS = {
+  term:      {label: "◯ термин",        name: "Термин",               rule: "2.1", hint: "Обведите слово, которое автор понимает по-своему", comment: "Как понимает автор"},
+  claim:     {label: "___ утверждение", name: "Главное утверждение",  rule: "2.2", hint: "Подчеркните главное утверждение", comment: "Своими словами"},
+  arg:       {label: "① шаг аргумента", name: "Шаг аргумента",        rule: "2.3", hint: "Шаги одного аргумента нумеруются по порядку", comment: "Как связано с соседними шагами"},
+  problem:   {label: "? вопрос автора", name: "Проблема автора",      rule: "1.4", hint: "Запишите проблему вопросом, со знаком «?»", comment: "Вопрос, который решает автор"},
+  star:      {label: "★ главное место", name: "Главное место книги",  rule: "1.2", hint: "Одно из 10–12 главных мест всей книги. Ставить скупо", comment: "Почему это главное"},
+  part:      {label: "▍ начало части",  name: "Начало части",         rule: "1.3", hint: "Где начинается новая часть рассуждения", comment: "О чём эта часть, одной фразой"},
+  dot:       {label: "• не понял",      name: "Не понял, вернусь",    rule: null,  hint: "Не застревайте: отметьте точкой и читайте дальше", comment: "Что именно непонятно"},
+  agree:     {label: "✓ согласен",      name: "Согласен",             rule: "3а.3", hint: "Согласие тоже требует обоснования", comment: "Потому что…"},
+  objection: {label: "≈ возражаю",      name: "Возражение",           rule: "3а.3", hint: "Возражение — только по одной из четырёх линз и с основанием", comment: "Потому что…"},
+  relevant:  {label: "◆ к нашему вопросу", name: "К нашему вопросу",  rule: null,  hint: "Место, которое отвечает на вопрос синтопического чтения", comment: "Как это звучит на нашем общем языке"},
+  note:      {label: "✎ заметка",       name: "Заметка",              rule: null,  hint: "Любая мысль на полях", comment: "Заметка"}
+};
+const LENSES = ["3б.1", "3б.2", "3б.3", "3б.4"];
+const MODES = [
+  {id: "elementary", group: "Элементарное", name: "Элементарное чтение", q: "Что говорит это предложение?",
+   goal: "Понять буквальный смысл фразы. Нужно, когда текст трудный, переводной или полон незнакомых слов.",
+   todo: ["Незнакомое слово отмечаем точкой и читаем дальше", "В конце абзаца возвращаемся к точкам: часть прояснит контекст", "Пересказываем трудную фразу своими словами в заметке"],
+   marks: ["dot", "note"], rules: []},
+  {id: "inspect", group: "Ознакомительное", name: "Ознакомительное чтение: систематический просмотр", q: "О чём книга? Какого она рода? Из каких частей?",
+   goal: "За ограниченное время понять, стоит ли книга большего. Не вчитываемся.",
+   todo: ["Оглавление: какой у книги «скелет»", "Заголовки, начала и концы глав", "Отмечаем главные места звёздочкой, а вопросы автора — вопросом"],
+   marks: ["star", "problem", "part", "note"], rules: []},
+  {id: "superficial", group: "Ознакомительное", name: "Ознакомительное чтение: поверхностное", q: "Что я понял, прочитав подряд, не останавливаясь?",
+   goal: "Прочитать трудный отрывок целиком, не застревая на непонятном.",
+   todo: ["Читаем подряд, без словарей и комментариев", "Непонятное — точкой, и дальше", "Понять половину с первого раза лучше, чем бросить"],
+   marks: ["dot", "star"], rules: []},
+  {id: "structure", group: "Аналитическое", name: "Аналитическое чтение: 1. Анализ структуры книги", q: "О чём книга в целом?",
+   goal: "Увидеть целое: тип книги, её единство, части и проблемы автора.",
+   todo: ["Отмечаем начала частей и одной фразой говорим, о чём каждая", "Ищем вопросы, на которые отвечает автор", "Звёздочка — места, которые держат всю книгу"],
+   marks: ["part", "problem", "star", "note"], rules: ["1.1", "1.2", "1.3", "1.4"]},
+  {id: "interpret", group: "Аналитическое", name: "Аналитическое чтение: 2. Интерпретация содержания книги", q: "Что именно сказано и как?",
+   goal: "Договориться с автором о словах, найти главные утверждения и восстановить аргументы.",
+   todo: ["Обводим термины и пишем, как их понимает автор", "Подчёркиваем главные утверждения и пересказываем своими словами", "Нумеруем шаги одного аргумента"],
+   marks: ["term", "claim", "arg", "problem", "note"], rules: ["2.1", "2.2", "2.3", "2.4"]},
+  {id: "critique", group: "Аналитическое", name: "Аналитическое чтение: 3. Критика книги", q: "Истинно ли это — целиком или отчасти? И что с того?",
+   goal: "Судить только после «я понимаю», каждое суждение — с основанием.",
+   todo: ["Сначала убедитесь, что можете пересказать мысль так, чтобы автор подписался", "Возражение — по одной из четырёх линз", "Если ни одной из первых трёх линз показать нельзя, нужно согласиться, хотя бы отчасти"],
+   marks: ["agree", "objection", "note"], rules: ["3а.1", "3а.2", "3а.3", "3б.1", "3б.2", "3б.3", "3б.4"]},
+  {id: "syntopic", group: "Синтопическое", name: "Синтопическое чтение", q: "Что этот автор отвечает на наш вопрос?",
+   goal: "Книга служит нашему вопросу: ищем нужные места и переводим термины автора на общий язык.",
+   todo: ["Сформулируйте вопрос группы в заметке к первому месту", "Отмечайте только места, которые на него отвечают", "В комментарии — как это звучит на нашем общем языке"],
+   marks: ["relevant", "term", "note"], rules: []}
+];
+
+/* ================= состояние ================= */
+const K = {text: "adler-reader-text", mode: "adler-reader-mode"};
+const SPUTNIK = "adler-sputnik-training-v1";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const store = {
+  get: (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { toast("Не хватает места в браузере: скачайте резервную копию"); return false; } }
+};
+const pnum = pg => /^[≈\d]/.test(pg.num) ? "с. " + pg.num : "без номера";
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); }
+
+let doc = null, notes = [], notesKey = "", modeId = store.get(K.mode, "structure"), filter = "all";
+
+/* ================= разбор текста ================= */
+// Формат: строки «# …» — шапка; «=== скан N · с. M · Раздел ===» — страница; «## » — заголовок; пустая строка — абзац.
+function parse(raw) {
+  const lines = raw.replace(/\r/g, "").split("\n");
+  const head = [], pages = [];
+  let page = null, buf = [], kind = "p";
+  const flush = () => {
+    if (page && buf.length) {
+      const text = buf.join(" ").replace(/\s+/g, " ").trim();
+      if (text) page.paras.push({id: `s${page.scan}-${page.paras.length}`, kind: page.toc ? "toc" : kind, text});
+    }
+    buf = []; kind = "p";
+  };
+  for (const line of lines) {
+    const m = line.match(/^===\s*скан\s+(\d+)\s*·\s*с\.\s*(≈?[\d?]+)\s*·\s*(.*?)\s*===\s*$/);
+    if (m) { flush(); page = {scan: +m[1], num: m[2], title: m[3], toc: /^оглавление/i.test(m[3]), paras: []}; pages.push(page); continue; }
+    if (!page) { if (line.startsWith("#")) head.push(line.replace(/^#\s?/, "")); continue; }
+    if (!line.trim()) { flush(); continue; }
+    if (line.startsWith("## ")) { flush(); kind = "h"; buf.push(line.slice(3)); flush(); continue; }
+    buf.push(line);
+  }
+  flush();
+  if (!pages.length) throw new Error("В файле нет разметки страниц «=== скан N · с. M · Раздел ===»");
+  return {head, pages, title: (head[0] || "Фрагмент").trim()};
+}
+
+/* ================= загрузка ================= */
+function loadText(raw, remember) {
+  try { doc = parse(raw); } catch (e) { toast(e.message); return; }
+  if (remember) store.set(K.text, raw);
+  notesKey = "adler-reader-notes:" + hash(raw);
+  notes = store.get(notesKey, []);
+  $("#open").hidden = true;
+  renderAll();
+}
+const saveNotes = () => store.set(notesKey, notes);
+function openFile(f) {
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => loadText(String(r.result), true);
+  r.readAsText(f, "utf-8");
+}
+$("#file").onchange = e => openFile(e.target.files[0]);
+["dragover", "dragenter"].forEach(t => document.addEventListener(t, e => { e.preventDefault(); $("#open").classList.add("drag"); }));
+["dragleave", "drop"].forEach(t => document.addEventListener(t, e => { e.preventDefault(); $("#open").classList.remove("drag"); }));
+document.addEventListener("drop", e => { const f = e.dataTransfer.files[0]; if (f) openFile(f); });
+$("#replaceBtn").onclick = () => { $("#text").innerHTML = ""; $("#open").hidden = false; window.scrollTo(0, 0); };
+
+/* ================= подсказка: как мы сейчас читаем ================= */
+function renderMode() {
+  const m = MODES.find(x => x.id === modeId) || MODES[3];
+  $("#mode").innerHTML = `<div class="now">Как мы сейчас читаем этот отрывок</div>
+    <h3>${esc(m.name)}</h3>
+    <div class="qs">${esc(m.q)}</div>
+    <p class="goal">${esc(m.goal)}</p>
+    <div class="legend">Пометки сейчас: ${m.marks.map(k => `<span style="color:var(--c-${k})">${esc(MARKS[k].label)}</span>`).join("")}</div>
+    <details ${innerWidth > 820 ? "open" : ""}><summary>Что делаем${m.rules.length ? " и какие правила работают" : ""}</summary>
+      <ul>${m.todo.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      ${m.rules.length ? `<ul class="rules">${m.rules.map(r => `<li><b>${r}</b>${esc(RULE[r])}</li>`).join("")}</ul>` : ""}
+    </details>
+    <div class="modes">${MODES.map(x => `<button class="tbtn" type="button" data-m="${x.id}" aria-pressed="${x.id === m.id}">${esc(x.group === "Аналитическое" ? x.name.replace("Аналитическое чтение: ", "Аналит. · ") : x.name.replace("Ознакомительное чтение: ", "Ознаком. · "))}</button>`).join("")}</div>`;
+  $$("#mode [data-m]").forEach(b => b.onclick = () => { modeId = b.dataset.m; store.set(K.mode, modeId); renderMode(); });
+}
+
+/* ================= текст с пометками ================= */
+function paraHTML(p) {
+  const own = notes.filter(n => n.pid === p.id).sort((a, b) => a.start - b.start);
+  const cuts = new Set([0, p.text.length]);
+  own.forEach(n => { cuts.add(n.start); cuts.add(n.end); });
+  const pts = [...cuts].sort((a, b) => a - b);
+  let html = "";
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i], b = pts[i + 1], seg = esc(p.text.slice(a, b));
+    const cov = own.filter(n => n.start <= a && n.end >= b);
+    if (!cov.length) { html += seg; continue; }
+    const attrs = [];
+    const argEnd = cov.find(n => n.type === "arg" && n.end === b);
+    if (argEnd) attrs.push(`data-n="${argNumber(argEnd)}"`);
+    if (cov.some(n => n.type === "star" && n.start === a)) attrs.push("data-star");
+    if (cov.some(n => n.type === "problem" && n.end === b)) attrs.push("data-q");
+    html += `<span class="m ${cov.map(n => "m-" + n.type).join(" ")}" data-ids="${cov.map(n => n.id).join(",")}" ${attrs.join(" ")}>${seg}</span>`;
+  }
+  const cls = p.kind === "h" ? "txt h" : p.kind === "toc" ? "txt toc" : "txt";
+  const margin = own.filter(n => n.comment).map(n => `<div class="mnote" data-id="${n.id}" style="--nc:var(--c-${n.type})"><small>${esc(MARKS[n.type].name)}</small>${esc(n.comment)}</div>`).join("");
+  return `<div class="row" data-row="${p.id}"><p class="${cls}" data-pid="${p.id}">${html}</p><div class="notes">${margin}</div></div>`;
+}
+let order = [];
+function argNumber(n) { return ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"][order.filter(x => x.type === "arg").indexOf(n)] || "•"; }
+function sortNotes() {
+  const pos = {}; let i = 0;
+  doc.pages.forEach(pg => pg.paras.forEach(p => { pos[p.id] = i++; }));
+  order = [...notes].sort((a, b) => (pos[a.pid] - pos[b.pid]) || (a.start - b.start));
+}
+function renderText() {
+  sortNotes();
+  $("#text").innerHTML = doc.pages.map(pg => `<div class="pagehead" id="pg-${pg.scan}" data-scan="${pg.scan}"><span><b>${esc(pnum(pg))}</b> · ${esc(pg.title)}</span><span>скан ${pg.scan}</span></div>${pg.paras.map(paraHTML).join("")}`).join("");
+  observePages();
+}
+function rerenderPara(pid) {
+  const p = doc.pages.flatMap(pg => pg.paras).find(x => x.id === pid);
+  sortNotes();
+  const row = $(`[data-row="${pid}"]`);
+  if (row && p) row.outerHTML = paraHTML(p);
+  // номера шагов аргумента могли сдвинуться в других абзацах
+  new Set(notes.filter(n => n.type === "arg").map(n => n.pid)).forEach(id => {
+    if (id === pid) return;
+    const q = doc.pages.flatMap(pg => pg.paras).find(x => x.id === id), r = $(`[data-row="${id}"]`);
+    if (q && r) r.outerHTML = paraHTML(q);
+  });
+}
+
+/* ================= навигация, поиск ================= */
+function renderNav() {
+  let html = "", last = "";
+  doc.pages.forEach(pg => {
+    if (pg.title !== last) { html += `<a class="sec" href="#pg-${pg.scan}">${esc(pg.title)}</a>`; last = pg.title; }
+    html += `<a class="pg" href="#pg-${pg.scan}" data-scan="${pg.scan}">${esc(pnum(pg))} <span style="opacity:.6">· скан ${pg.scan}</span></a>`;
+  });
+  $("#nav").innerHTML = html;
+  $$("#nav a").forEach(a => a.onclick = () => $("#left").classList.remove("open"));
+}
+let io;
+function observePages() {
+  io && io.disconnect();
+  io = new IntersectionObserver(es => {
+    const vis = es.filter(e => e.isIntersecting).map(e => +e.target.dataset.scan);
+    if (!vis.length) return;
+    const scan = Math.min(...vis), pg = doc.pages.find(p => p.scan === scan);
+    $("#where").textContent = `${pnum(pg)} · ${pg.title}`;
+    $$("#nav a.pg").forEach(a => a.classList.toggle("cur", +a.dataset.scan === scan));
+  }, {rootMargin: "-60px 0px -70% 0px"});
+  $$(".pagehead").forEach(h => io.observe(h));
+}
+$("#q").oninput = e => {
+  const q = e.target.value.trim().toLowerCase();
+  if (q.length < 3) { $("#hits").innerHTML = ""; return; }
+  const hits = [];
+  doc.pages.forEach(pg => pg.paras.forEach(p => {
+    const i = p.text.toLowerCase().indexOf(q);
+    if (i >= 0 && hits.length < 40) hits.push({pg, p, i});
+  }));
+  $("#hits").innerHTML = hits.length ? hits.map(h => {
+    const a = Math.max(0, h.i - 30), b = Math.min(h.p.text.length, h.i + q.length + 30);
+    return `<a href="#" data-pid="${h.p.id}">${esc(pnum(h.pg))}: …${esc(h.p.text.slice(a, h.i))}<mark>${esc(h.p.text.slice(h.i, h.i + q.length))}</mark>${esc(h.p.text.slice(h.i + q.length, b))}…</a>`;
+  }).join("") : '<span style="color:var(--graphite)">не найдено</span>';
+  $$("#hits a").forEach(a => a.onclick = ev => { ev.preventDefault(); goPara(a.dataset.pid); $("#left").classList.remove("open"); });
+};
+function goPara(pid, noteId) {
+  const el = $(`[data-pid="${pid}"]`); if (!el) return;
+  el.scrollIntoView({block: "center", behavior: "smooth"});
+  const t = noteId ? $$(`.m`, el).filter(s => s.dataset.ids.split(",").includes(noteId)) : [];
+  t.forEach(s => { s.classList.remove("flash"); void s.offsetWidth; s.classList.add("flash"); });
+}
+
+/* ================= выделение → панель пометок ================= */
+let sel = null;
+function selectionInfo() {
+  const s = getSelection();
+  if (!s.rangeCount || s.isCollapsed) return null;
+  const r = s.getRangeAt(0);
+  const pEl = (r.startContainer.nodeType === 1 ? r.startContainer : r.startContainer.parentElement)?.closest("p[data-pid]");
+  if (!pEl || !$("#text").contains(pEl)) return null;
+  const pre = document.createRange(); pre.setStart(pEl, 0); pre.setEnd(r.startContainer, r.startOffset);
+  const start = pre.toString().length;
+  let end;
+  if (pEl.contains(r.endContainer)) { const pre2 = document.createRange(); pre2.setStart(pEl, 0); pre2.setEnd(r.endContainer, r.endOffset); end = pre2.toString().length; }
+  else end = pEl.textContent.length;   // выделение шире абзаца — обрезаем по его концу
+  const text = pEl.textContent;
+  return snapWords({pid: pEl.dataset.pid, text, start, end, rect: r.getBoundingClientRect()});
+}
+function snapWords(x) {
+  const w = /[\p{L}\p{N}’'-]/u;
+  while (x.start > 0 && w.test(x.text[x.start - 1]) && w.test(x.text[x.start])) x.start--;
+  while (x.end < x.text.length && w.test(x.text[x.end]) && w.test(x.text[x.end - 1])) x.end++;
+  while (x.start < x.end && /\s/.test(x.text[x.start])) x.start++;
+  while (x.end > x.start && /\s/.test(x.text[x.end - 1])) x.end--;
+  return x.end > x.start ? x : null;
+}
+function toSentence(x) {
+  let a = x.start, b = x.end; const t = x.text;
+  while (a > 0 && !/[.!?…]\s/.test(t.slice(a - 2, a))) a--;
+  while (b < t.length && !/[.!?…]/.test(t[b - 1])) b++;
+  while (b < t.length && /[»"”)]/.test(t[b])) b++;
+  return snapWords({...x, start: a, end: b});
+}
+function showBar() {
+  const info = selectionInfo();
+  if (!info) { hideBar(); return; }
+  sel = info;
+  const m = MODES.find(x => x.id === modeId);
+  const rec = m.marks, rest = Object.keys(MARKS).filter(k => !rec.includes(k));
+  $("#bar").innerHTML = rec.map(k => `<button type="button" class="rec" data-k="${k}" title="${esc(MARKS[k].hint)}">${esc(MARKS[k].label)}</button>`).join("")
+    + `<span class="sep"></span><button type="button" data-k="sentence" title="Расширить выделение до предложения">⇔ всё предложение</button>`
+    + `<span class="sep"></span>` + rest.map(k => `<button type="button" data-k="${k}" title="${esc(MARKS[k].hint)}">${esc(MARKS[k].label)}</button>`).join("")
+    + `<span class="tip">Сейчас: ${esc(m.name)}. Выделены слова: «${esc(info.text.slice(info.start, info.end).slice(0, 60))}${info.end - info.start > 60 ? "…" : ""}»</span>`;
+  const bar = $("#bar"); bar.classList.add("on");
+  const r = info.rect, w = bar.offsetWidth;
+  bar.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + "px";
+  bar.style.top = (r.top > 140 ? r.top - bar.offsetHeight - 10 : r.bottom + 10) + "px";
+  $$("#bar button").forEach(b => b.onmousedown = e => e.preventDefault());
+  $$("#bar button").forEach(b => b.onclick = () => {
+    if (b.dataset.k === "sentence") {
+      const s2 = toSentence(sel); if (!s2) return;
+      const pEl = $(`p[data-pid="${sel.pid}"]`), rg = rangeFor(pEl, s2.start, s2.end);
+      if (rg) { getSelection().removeAllRanges(); getSelection().addRange(rg); }
+      showBar(); return;
+    }
+    openSheet({pid: sel.pid, start: sel.start, end: sel.end, quote: sel.text.slice(sel.start, sel.end), type: b.dataset.k});
+  });
+}
+function rangeFor(pEl, start, end) {
+  const w = document.createTreeWalker(pEl, NodeFilter.SHOW_TEXT); let pos = 0, n, r = document.createRange(), s = false;
+  while ((n = w.nextNode())) {
+    const len = n.data.length;
+    if (!s && start <= pos + len) { r.setStart(n, start - pos); s = true; }
+    if (s && end <= pos + len) { r.setEnd(n, end - pos); return r; }
+    pos += len;
+  }
+  return null;
+}
+const hideBar = () => { $("#bar").classList.remove("on"); };
+let selT;
+document.addEventListener("selectionchange", () => { clearTimeout(selT); selT = setTimeout(() => { if (!$("#sheet").classList.contains("on")) showBar(); }, 220); });
+document.addEventListener("mousedown", e => { if (!e.target.closest("#bar")) hideBar(); });
+
+/* ================= форма пометки ================= */
+function pageOf(pid) { const scan = +pid.slice(1).split("-")[0]; return doc.pages.find(p => p.scan === scan); }
+function openSheet(n, existing) {
+  const mk = MARKS[n.type], m = MODES.find(x => x.id === modeId);
+  const toSputnik = ["term", "claim", "arg", "problem"].includes(n.type);
+  $("#sheetIn").innerHTML = `<h3>${esc(mk.name)} · ${esc(pnum(pageOf(n.pid)))}</h3>
+    <div class="rule">${mk.rule ? `<b>${mk.rule}</b> ${esc(RULE[mk.rule])}<br>` : ""}${esc(mk.hint)} · сейчас: ${esc(m.name)}</div>
+    <label>Отмеченный текст <span style="opacity:.7">(можно поправить ошибки распознавания)</span></label>
+    <textarea id="fQuote" rows="2">${esc(existing ? n.quote : n.quote)}</textarea>
+    ${n.type === "objection" ? `<label>По какой линзе возражаете?</label><div class="chips" id="fLens">${LENSES.map(l => `<button type="button" class="chip" data-l="${l}" aria-pressed="${n.lens === l}">${l} ${esc(RULE[l])}</button>`).join("")}</div>` : ""}
+    <label>${esc(mk.comment)}</label>
+    <textarea id="fComment" class="c" rows="2" placeholder="пишите от руки…">${esc(n.comment || "")}</textarea>
+    <div class="row2">
+      ${toSputnik ? `<label class="chk"><input type="checkbox" id="fSend" ${existing ? "" : "checked"}> ${existing && n.sent ? "Уже в тренинге «Спутника». Отправить ещё раз" : "Добавить карточку в тренинг «Спутника»"}</label>` : ""}
+      <span style="flex:1"></span>
+      ${existing ? `<button type="button" class="btn danger" id="fDel">Удалить</button>` : ""}
+      <button type="button" class="btn ghost" id="fCancel">Отмена</button>
+      <button type="button" class="btn" id="fSave">Сохранить</button>
+    </div>`;
+  let lens = n.lens || null;
+  $$("#fLens .chip").forEach(c => c.onclick = () => { lens = c.dataset.l; $$("#fLens .chip").forEach(x => x.setAttribute("aria-pressed", x === c)); });
+  $("#sheet").classList.add("on"); hideBar();
+  setTimeout(() => $("#fComment").focus(), 30);
+  $("#fCancel").onclick = closeSheet;
+  if (existing) $("#fDel").onclick = () => { notes = notes.filter(x => x.id !== n.id); saveNotes(); rerenderPara(n.pid); renderNotes(); closeSheet(); };
+  $("#fSave").onclick = () => {
+    const quote = $("#fQuote").value.trim() || n.quote, comment = $("#fComment").value.trim();
+    if (n.type === "objection" && !lens) return toast("Выберите линзу: по какому основанию вы возражаете");
+    const rec = existing ? notes.find(x => x.id === n.id) : {id: newId(), pid: n.pid, start: n.start, end: n.end, type: n.type, mode: modeId, ts: Date.now()};
+    Object.assign(rec, {quote, comment, lens});
+    if (!existing) notes.push(rec);
+    if ($("#fSend") && $("#fSend").checked) { if (sendToSputnik(rec)) rec.sent = true; }
+    saveNotes(); rerenderPara(rec.pid); renderNotes(); closeSheet();
+    getSelection().removeAllRanges();
+  };
+}
+const closeSheet = () => $("#sheet").classList.remove("on");
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeSheet(); hideBar(); } });
+document.addEventListener("click", e => {
+  const span = e.target.closest(".m"), mn = e.target.closest(".mnote");
+  if (!getSelection().isCollapsed) return;
+  const id = mn ? mn.dataset.id : span ? span.dataset.ids.split(",").pop() : null;
+  const n = id && notes.find(x => x.id === id);
+  if (n) openSheet(n, true);
+});
+
+/* ================= отправка в тренинг «Спутника» ================= */
+// «Спутник» хранит тренинг в том же браузере. Если он открыт в соседней вкладке, подхватит карточку сам.
+function sendToSputnik(n) {
+  const S = store.get(SPUTNIK, {}) || {};
+  S.boards = S.boards || {};
+  const pg = pageOf(n.pid).num, colors = ["#FFF1A6", "#FFD8CB", "#D3E8F7", "#D8EECF", "#E7DBF6"];
+  const card = (board, text, extra) => {
+    (S.boards[board] = S.boards[board] || []).push({id: newId(), board, text, ts: Date.now(), col: "", rot: +(Math.random() * 5 - 2.5).toFixed(2),
+      extra: extra.filter(e => e[1]), color: colors[Math.floor(Math.random() * colors.length)]});
+  };
+  if (n.type === "term") card("terms", n.quote, [["Стр.", pg], ["Как понимает автор", n.comment]]);
+  if (n.type === "claim") card("sentences", n.quote, [["Стр.", pg], ["Своими словами", n.comment]]);
+  if (n.type === "problem") {
+    const q = n.comment && n.comment.includes("?") ? n.comment : (n.comment || n.quote) + (/[?]$/.test(n.comment || n.quote) ? "" : "?");
+    card("problems", q, [["Стр.", pg], ["Цитата", n.comment ? n.quote : ""]]);
+  }
+  if (n.type === "arg") (S.chain = S.chain || []).push({t: n.quote + (n.comment ? ` (${n.comment})` : ""), k: "p", page: pg});
+  const ok = store.set(SPUTNIK, S);
+  if (ok) toast("Карточка добавлена в тренинг «Спутника»");
+  return ok;
+}
+
+/* ================= список пометок ================= */
+function renderNotes() {
+  sortNotes();
+  $("#ncount").textContent = notes.length;
+  const used = [...new Set(order.map(n => n.type))];
+  $("#filters").innerHTML = [["all", "все"], ...used.map(k => [k, MARKS[k].label])].map(([k, l]) => `<button type="button" class="chip" data-f="${k}" aria-pressed="${filter === k}">${esc(l)}</button>`).join("");
+  $$("#filters .chip").forEach(c => c.onclick = () => { filter = c.dataset.f; renderNotes(); });
+  const shown = order.filter(n => filter === "all" || n.type === filter);
+  $("#nlist").innerHTML = shown.length ? shown.map(n => {
+    const mode = MODES.find(m => m.id === n.mode);
+    return `<div class="nitem" data-id="${n.id}" style="--nc:var(--c-${n.type})">
+      <div class="meta"><b>${esc(MARKS[n.type].name)}</b><span>${esc(pnum(pageOf(n.pid)))}</span>${n.lens ? `<span>${n.lens} ${esc(RULE[n.lens])}</span>` : ""}${n.sent ? "<span>✓ в «Спутнике»</span>" : ""}</div>
+      <div class="q">«${esc(n.quote)}»</div>${n.comment ? `<div class="c">${esc(n.comment)}</div>` : ""}
+      <div class="meta">${mode ? esc(mode.name) : ""}</div>
+      <div class="acts"><button type="button" data-a="go">к тексту</button><button type="button" data-a="edit">изменить</button></div></div>`;
+  }).join("") : '<p style="color:var(--graphite);font-size:14px">Выделите слово или предложение в тексте и выберите пометку.</p>';
+  $$("#nlist .nitem").forEach(el => el.onclick = e => {
+    const n = notes.find(x => x.id === el.dataset.id);
+    if (e.target.dataset.a === "edit") return openSheet(n, true);
+    goPara(n.pid, n.id); $("#right").classList.remove("open");
+  });
+}
+
+/* ================= экспорт ================= */
+function download(name, text, type) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+$("#exportMd").onclick = () => {
+  sortNotes();
+  const L = [`# Пометки: ${doc.title}`, `_${new Date().toLocaleString("ru-RU")}_`, ""];
+  MODES.forEach(m => {
+    const list = order.filter(n => n.mode === m.id); if (!list.length) return;
+    L.push(`## ${m.name}`, `${m.q}`, "");
+    list.forEach(n => {
+      const mk = MARKS[n.type];
+      L.push(`- **${mk.name}**${mk.rule ? ` (${mk.rule} ${RULE[mk.rule]})` : ""}, ${pnum(pageOf(n.pid))}: «${n.quote}»${n.lens ? ` — линза ${n.lens} ${RULE[n.lens]}` : ""}${n.comment ? `\n  ${mk.comment}: ${n.comment}` : ""}`);
+    });
+    L.push("");
+  });
+  download(`adler-pometki-${new Date().toISOString().slice(0, 10)}.md`, L.join("\n"), "text/markdown");
+};
+$("#exportJson").onclick = () => download(`adler-pometki-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({notesKey, notes}, null, 2), "application/json");
+$("#importJson").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => {
+    const d = JSON.parse(t);
+    if (!Array.isArray(d.notes)) throw new Error();
+    if (d.notesKey && d.notesKey !== notesKey && !confirm("Копия сделана для другой версии текста. Пометки могут встать не на свои места. Восстановить?")) return;
+    const have = new Set(notes.map(n => n.id));
+    notes.push(...d.notes.filter(n => !have.has(n.id)));
+    saveNotes(); renderAll(); toast("Пометки восстановлены");
+  }).catch(() => toast("Не удалось прочитать резервную копию"));
+};
+
+/* ================= общее ================= */
+let toastT;
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2600); }
+$("#navBtn").onclick = () => $("#left").classList.toggle("open");
+$("#notesBtn").onclick = () => $("#right").classList.toggle("open");
+function renderAll() { renderMode(); renderText(); renderNav(); renderNotes(); document.title = "Читалка · " + doc.title.replace(/\.\s.*$/, ""); }
+
+// Текст: вшитый (локальная сборка ведущего) → сохранённый в браузере → выбор файла.
+const embedded = document.getElementById("embedded-text");
+const saved = store.get(K.text, null);
+renderMode();
+if (embedded) loadText(embedded.textContent.replace(/^\n/, ""), false);
+else if (saved) loadText(saved, false);
+else $("#open").hidden = false;
+})();
+</script>
+</body>
+</html>

@@ -438,6 +438,7 @@ footer{padding:40px 0 64px;color:var(--graphite);font-size:15px;border-top:1px s
   </div>
   <label class="tr-book"><span>Книга для тренинга:</span><input id="trBook" spellcheck="false"></label>
   <p class="tr-room">Всё, что вы впишете, хранится только в этом браузере. Ведущий параллельно переносит ответы группы на слайды.</p>
+  <p class="tr-room">Нет книги под рукой? Откройте <a href="reader.html">читалку фрагмента</a>: выделяйте слова и предложения, пишите комментарии, а термины, утверждения, шаги аргумента и вопросы автора одной кнопкой попадают в карточки этого тренинга.</p>
 
   <div class="tr-min" id="trMin" aria-live="polite"></div>
 
@@ -1403,6 +1404,14 @@ $("#trReset").onclick = () => {
 };
 $("#trBook").value = S.book;
 $("#trBook").addEventListener("input", e => { S.book = e.target.value.trim() || DEFAULT_BOOK; save(); });
+
+// Читалка фрагмента дописывает карточки в тот же тренинг — подхватываем их из соседней вкладки.
+addEventListener("storage", e => {
+  if (e.key !== KEY || !e.newValue) return;
+  try { S = Object.assign(blank(), JSON.parse(e.newValue)); } catch (_) { return; }
+  Object.values(S.boards).forEach(l => l.forEach(c => { c.id = c.id || "local-" + c.ts; }));
+  Object.values(boards).forEach(renderBoard); drawOutline(); drawChain(); drawQuiz(); refresh();
+});
 
 drawOutline(); drawChain(); drawQuiz(); refresh();
 })();
