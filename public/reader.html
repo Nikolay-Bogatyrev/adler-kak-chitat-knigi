@@ -188,10 +188,12 @@ main{min-width:0;padding:0 28px 120px}
     <section class="mode" id="mode"></section>
     <div id="text"></div>
     <div class="open" id="open" hidden>
-      <h2>Откройте текст фрагмента</h2>
-      <p>Файл <b>.txt</b> с разметкой страниц, который прислал ведущий. Он откроется прямо в браузере: никуда не загружается и запоминается здесь же.</p>
-      <p><label class="btn" style="display:inline-block;cursor:pointer">Выбрать файл<input type="file" accept=".txt,text/plain" id="file" hidden></label></p>
-      <p>или перетащите файл сюда</p>
+      <h2>С каким текстом работаем?</h2>
+      <p>Текст открывается прямо в браузере: он никуда не загружается и запоминается здесь же, вместе с пометками.</p>
+      <p><label class="btn" style="display:inline-block;cursor:pointer">Открыть файл .txt<input type="file" accept=".txt,text/plain" id="file" hidden></label> или перетащите файл сюда</p>
+      <p style="margin-top:22px">Нет файла? Вставьте текст из буфера обмена: например, из официального бесплатного фрагмента на сайте издательства. Абзацы разделяйте пустой строкой.</p>
+      <textarea id="paste" rows="6" style="width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 10px" placeholder="Вставьте сюда текст для разбора"></textarea>
+      <p><button class="btn" type="button" id="pasteBtn">Открыть вставленный текст</button> <button class="btn ghost" type="button" id="demoBtn">Потренироваться на демо-тексте</button></p>
     </div>
   </main>
 
@@ -329,6 +331,35 @@ function loadText(raw, remember) {
   renderAll();
 }
 const saveNotes = () => store.set(notesKey, notes);
+
+// Текст без разметки страниц превращаем в одну страницу: абзацы — по пустым строкам (или по строкам, если пустых нет).
+function wrapPlain(raw, title) {
+  const t = raw.replace(/\r/g, "").trim();
+  const paras = /\n\s*\n/.test(t) ? t.split(/\n\s*\n/) : t.split("\n");
+  return `# ${title}\n=== скан 1 · с. ? · ${title} ===\n` + paras.map(p => p.replace(/\s*\n\s*/g, " ").trim()).filter(Boolean).join("\n\n") + "\n";
+}
+// Демо-текст написан для тренировки пометок. Это не цитата из книги Адлера.
+const DEMO = `# Демо-текст для тренировки пометок (написан для читалки, это не цитата из книги)
+=== скан 1 · с. 1 · Демо: читать как разговаривать ===
+## Читать как разговаривать
+
+Почему одни читатели выходят из книги умнее, а другие — только уставшими? Разница не в скорости и не в количестве прочитанного.
+
+Назовём активным чтением такое чтение, при котором читатель всё время задаёт книге вопросы и сам ищет на них ответы. Пассивный читатель ждёт, что смысл придёт к нему сам.
+
+Понимание возникает только там, где читатель совершает работу. Работа читателя — это вопросы к тексту и попытки на них ответить. Книга не может ответить на вопрос, который ей не задали. Следовательно, чем больше вопросов задаёт читатель, тем больше он понимает.
+
+=== скан 2 · с. 2 · Демо: читать как разговаривать ===
+Из этого не следует, что любую книгу нужно читать медленно. Одни тексты достаточно пролистать, другие стоит перечитывать годами. Умение выбрать скорость — часть искусства чтения.
+
+Остаётся открытым вопрос: можно ли научиться активному чтению в одиночку, без учителя и собеседника?
+`;
+$("#pasteBtn").onclick = () => {
+  const t = $("#paste").value.trim();
+  if (t.length < 20) return toast("Вставьте текст подлиннее");
+  loadText(/^===\s*скан/m.test(t) ? t : wrapPlain(t, "Вставленный текст"), true);
+};
+$("#demoBtn").onclick = () => loadText(DEMO, true);
 function openFile(f) {
   if (!f) return;
   const r = new FileReader();
